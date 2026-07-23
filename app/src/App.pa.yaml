@@ -1,0 +1,42 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+App:
+  Properties:
+    OnStart: |
+      =Set(
+          TemaNewY,
+          {
+              ScuroPrimario: ColorValue("#0D1B2A"),
+              BluPrimario: ColorValue("#1B3A5C"),
+              AccentiDorati: ColorValue("#C9A227"),
+              LuceSuperficie: ColorValue("#F5F0EB"),
+              TestoPrimario: ColorValue("#0D1B2A"),
+              TestoSecondario: ColorValue("#5A6B7D"),
+              Successo: ColorValue("#2E7D32"),
+              Avvertimento: ColorValue("#E65100"),
+              Errore: ColorValue("#C62828")
+          }
+      );
+      // Salva i tre ruoli ammessi in una variabile globale sotto forma di tabella
+      Set(
+          varRuoliAmmessi,
+          [
+              "Agente",
+              "Office",
+              "Manager"
+          ]
+      );
+      Set(varRuoloUtente, "");
+      Set(varIsManager, false);
+      Set(lblErroreVisible, false);
+      Set(varFiltroSoloDisponibili, false);
+
+      Set(varNotificheAttive, false)
+    StartScreen: ='LOGIN'
+    Theme: =PowerAppsTheme

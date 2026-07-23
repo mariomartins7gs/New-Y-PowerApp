@@ -1,0 +1,18 @@
+{
+  "QualifiedValues": [
+    {
+      "Namespace": "Notifiche_1 (Moduli)",
+      "Kind": "default.cds_appnotification_forms",
+      "Values": {
+        "Informazioni": "6f41fa3c-dafb-4d09-b743-fd863ad1f230"
+      }
+    },
+    {
+      "Namespace": "Notifiche_1 (Formulários)",
+      "Kind": "default.cds_appnotification_forms",
+      "Values": {
+        "Informazioni": "6f41fa3c-dafb-4d09-b743-fd863ad1f230"
+      }
+    }
+  ]
+}

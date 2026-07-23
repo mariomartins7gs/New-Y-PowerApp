@@ -1,0 +1,1984 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  scrCustomers:
+    Properties:
+      Fill: =TemaNewY.ScuroPrimario
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+      OnHidden: =Reset(txtSearchCustomers)
+      OnVisible: =varRuoloUtente <> "Agent";Set(varMenuAperto, false)
+    Children:
+      - cntHomepage_14:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =TemaNewY.ScuroPrimario
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Width: |
+              =Parent.Width
+          Children:
+            - cntHeader_12:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  FillPortions: =0
+                  Height: =Parent.Height/9
+                  LayoutAlignItems: =LayoutJustifyContent.SpaceBetween
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                Children:
+                  - Container7_3:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        Height: =Parent.Height/9
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =300
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        Width: |
+                          =Parent.Width/3
+                      Children:
+                        - Label1_15:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =TemaNewY.LuceSuperficie
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =30
+                              Text: ="CUSTOMERS"
+                              Width: =500
+                              X: |
+                                =
+            - cntBottom_14:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  AlignInContainer: =AlignInContainer.Center
+                  Fill: =Color.Transparent
+                  Height: |
+                    =Parent.Height*2/3
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =10
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusTopRight: =16
+                  Width: =Parent.Width - 40
+                  Y: =cntHeader_12.Height
+                Children:
+                  - txtSearchCustomers:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Start
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Clear: =true
+                        Default: =""
+                        Font: =Font.'Open Sans'
+                        HintText: |-
+                          ="🔍Search by customer name or email..."
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        RadiusBottomLeft: =20
+                        RadiusBottomRight: =20
+                        RadiusTopLeft: =20
+                        RadiusTopRight: =20
+                        Width: =Parent.Width/3
+                        X: =Parent.X+30
+                        Y: |+
+                          =0
+                  - glrCustomer:
+                      Control: Gallery@2.15.0
+                      Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Items: |-
+                          =Filter(
+                              'Clienti-BC', 
+                              Attivo = true,
+                              (!varFiltroSenzaAgente || IsBlank('Cod agente')),
+                              IsBlank(txtSearchCustomers.Text) || 
+                              txtSearchCustomers.Text in Nome || 
+                              txtSearchCustomers.Text in Città ||
+                              txtSearchCustomers.Text in ID,
+                              If(
+                                  varRuoloUtente = "Agent",
+                                  'Cod agente' = varUtenteCorrente.Agent_Code,
+                                  true
+                              )
+                          )
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        TemplateSize: =280
+                        WrapCount: =4
+                      Children:
+                        - Button2:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorValue("#1B3A5C")
+                              BorderThickness: =3
+                              Color: =ColorValue("#5A6B7D")
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              DisplayMode: =DisplayMode.View
+                              Fill: =If(IsBlank(ThisItem.'Cod agente'), RGBA(255, 244, 189, 1), RGBA(245, 240, 235, 1))
+                              Font: =Font.'Open Sans'
+                              Height: =224
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              OnSelect: =Select(Parent)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =16
+                              RadiusBottomRight: =16
+                              RadiusTopLeft: =16
+                              RadiusTopRight: =16
+                              Text: =""
+                              Width: =272
+                              X: =40
+                        - Button4(icoAvatar):
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =ColorValue("#FFFFFF")
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1B3A5C")
+                              Font: =Font.'Segoe UI'
+                              Height: =70
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              OnSelect: =Set(varClienteSel, ThisItem); Set(varPopupCliente, true);Set(varMenuAperto,false)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =100
+                              RadiusBottomRight: =100
+                              RadiusTopLeft: =100
+                              RadiusTopRight: =100
+                              Text: |-
+                                =Upper(
+                                    Left(ThisItem.Nome, 1) & 
+                                    Mid(ThisItem.Nome, Find(" ", ThisItem.Nome) + 1, 1)
+                                )
+                              Width: =70
+                              X: =51
+                              Y: =12
+                        - Label27:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#0D1B2A")
+                              Font: =Font.'Open Sans'
+                              Height: =43
+                              OnSelect: =Select(Parent)
+                              Text: |-
+                                ="Total: " & Text(
+                                    Coalesce(
+                                        Sum(
+                                            Filter(
+                                                'RigheOrdini-BC',
+                                                'Nr documento' in Filter('Ordini-BC', 'ID-Cliente' = Value(ThisItem.ID)).Nr
+                                            ),
+                                            Importo
+                                        ),
+                                        0
+                                    ),
+                                    "€ #,##0.00"
+                                )
+                              Width: =glrCustomer.Width/6
+                              X: =40
+                              Y: =161
+                        - Label29:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =TemaNewY.ScuroPrimario
+                              Font: =Font.'Open Sans'
+                              OnSelect: =Select(Parent)
+                              Text: |-
+                                ="Qty Items: " & Coalesce(
+                                    Sum(
+                                        Filter(
+                                            'RigheOrdini-BC',
+                                            'Nr documento' in Filter('Ordini-BC', 'ID-Cliente' = Value(ThisItem.ID)).Nr
+                                        ),
+                                        Quantità
+                                    ),
+                                    0
+                                )
+                              Width: =glrCustomer.Width/6
+                              X: =40
+                              Y: =107
+                        - Label26:
+                            Control: Label@2.5.1
+                            Properties:
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              Height: =41
+                              OnSelect: =Select(Parent)
+                              Text: =ThisItem.Nome
+                              Width: =Parent.TemplateWidth - Self.X - 25
+                              X: ='Button4(icoAvatar)'.X + 'Button4(icoAvatar)'.Width + 12
+                              Y: ='Button4(icoAvatar)'.Y + ('Button4(icoAvatar)'.Height - Self.Height) / 2
+                  - Form2:
+                      Control: Form@2.4.4
+                      Variant: Classic
+                      Layout: Vertical
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        DataSource: ='Clienti-BC'
+                        DefaultMode: =FormMode.New
+                        Fill: =TemaNewY.LuceSuperficie
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Visible: =varMostraNuovoCliente
+                      Children:
+                        - Nome_DataCard2:
+                            Control: TypedDataCard@1.0.7
+                            Variant: ClassicTextualEdit
+                            IsLocked: true
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              DataField: ="Nome"
+                              Default: =ThisItem.Nome
+                              DisplayName: =DataSourceInfo([@'Clienti-BC'],DataSourceInfo.DisplayName,Nome)
+                              MaxLength: =DataSourceInfo([@'Clienti-BC'], DataSourceInfo.MaxLength, Nome)
+                              Required: =false
+                              Update: =DataCardValue11.Text
+                              Width: =450
+                              X: =0
+                              Y: =0
+                            Children:
+                              - DataCardKey11:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldName
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =34
+                                    Text: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    Wrap: =false
+                                    X: =30
+                                    Y: =10
+                              - DataCardValue11:
+                                  Control: Classic/TextInput@2.3.2
+                                  MetadataKey: FieldValue
+                                  Properties:
+                                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                    Default: =Parent.Default
+                                    DelayOutput: =true
+                                    DisplayMode: =Parent.DisplayMode
+                                    Font: =Font.'Open Sans'
+                                    HoverBorderColor: =RGBA(0, 18, 107, 1)
+                                    HoverFill: =RGBA(186, 202, 226, 1)
+                                    MaxLength: =Parent.MaxLength
+                                    PaddingLeft: =5
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Tooltip: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardKey11.Y + DataCardKey11.Height + 5
+                              - ErrorMessage11:
+                                  Control: Label@2.5.1
+                                  MetadataKey: ErrorMessage
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(168, 0, 0, 1)
+                                    Font: =Font.'Open Sans'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =10
+                                    Live: =Live.Assertive
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =Parent.Error
+                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardValue11.Y + DataCardValue11.Height
+                              - StarVisible11:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldRequired
+                                  Properties:
+                                    Align: =Align.Center
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =DataCardKey11.Height
+                                    Text: ="*"
+                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                    Width: =30
+                                    Wrap: =false
+                                    Y: =DataCardKey11.Y
+                        - Città_DataCard2:
+                            Control: TypedDataCard@1.0.7
+                            Variant: ClassicTextualEdit
+                            IsLocked: true
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              DataField: ="Citt_x00e0_"
+                              Default: =ThisItem.Città
+                              DisplayName: =DataSourceInfo([@'Clienti-BC'],DataSourceInfo.DisplayName,Città)
+                              MaxLength: =DataSourceInfo([@'Clienti-BC'], DataSourceInfo.MaxLength, Città)
+                              Required: =false
+                              Update: =DataCardValue12.Text
+                              Width: =450
+                              X: =1
+                              Y: =0
+                            Children:
+                              - DataCardKey12:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldName
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =34
+                                    Text: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    Wrap: =false
+                                    X: =30
+                                    Y: =10
+                              - DataCardValue12:
+                                  Control: Classic/TextInput@2.3.2
+                                  MetadataKey: FieldValue
+                                  Properties:
+                                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                    Default: =Parent.Default
+                                    DelayOutput: =true
+                                    DisplayMode: =Parent.DisplayMode
+                                    Font: =Font.'Open Sans'
+                                    HoverBorderColor: =RGBA(0, 18, 107, 1)
+                                    HoverFill: =RGBA(186, 202, 226, 1)
+                                    MaxLength: =Parent.MaxLength
+                                    PaddingLeft: =5
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Tooltip: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardKey12.Y + DataCardKey12.Height + 5
+                              - ErrorMessage12:
+                                  Control: Label@2.5.1
+                                  MetadataKey: ErrorMessage
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(168, 0, 0, 1)
+                                    Font: =Font.'Open Sans'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =10
+                                    Live: =Live.Assertive
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =Parent.Error
+                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardValue12.Y + DataCardValue12.Height
+                              - StarVisible12:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldRequired
+                                  Properties:
+                                    Align: =Align.Center
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =DataCardKey12.Height
+                                    Text: ="*"
+                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                    Width: =30
+                                    Wrap: =false
+                                    Y: =DataCardKey12.Y
+                        - Indirizzo_DataCard2:
+                            Control: TypedDataCard@1.0.7
+                            Variant: ClassicTextualEdit
+                            IsLocked: true
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              DataField: ="Indirizzo"
+                              Default: =ThisItem.Indirizzo
+                              DisplayName: =DataSourceInfo([@'Clienti-BC'],DataSourceInfo.DisplayName,Indirizzo)
+                              MaxLength: =DataSourceInfo([@'Clienti-BC'], DataSourceInfo.MaxLength, Indirizzo)
+                              Required: =false
+                              Update: =DataCardValue13.Text
+                              Width: =450
+                              X: =2
+                              Y: =0
+                            Children:
+                              - DataCardKey13:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldName
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =34
+                                    Text: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    Wrap: =false
+                                    X: =30
+                                    Y: =10
+                              - DataCardValue13:
+                                  Control: Classic/TextInput@2.3.2
+                                  MetadataKey: FieldValue
+                                  Properties:
+                                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                    Default: =Parent.Default
+                                    DelayOutput: =true
+                                    DisplayMode: =Parent.DisplayMode
+                                    Font: =Font.'Open Sans'
+                                    HoverBorderColor: =RGBA(0, 18, 107, 1)
+                                    HoverFill: =RGBA(186, 202, 226, 1)
+                                    MaxLength: =Parent.MaxLength
+                                    PaddingLeft: =5
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Tooltip: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardKey13.Y + DataCardKey13.Height + 5
+                              - ErrorMessage13:
+                                  Control: Label@2.5.1
+                                  MetadataKey: ErrorMessage
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(168, 0, 0, 1)
+                                    Font: =Font.'Open Sans'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =10
+                                    Live: =Live.Assertive
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =Parent.Error
+                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardValue13.Y + DataCardValue13.Height
+                              - StarVisible13:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldRequired
+                                  Properties:
+                                    Align: =Align.Center
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =DataCardKey13.Height
+                                    Text: ="*"
+                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                    Width: =30
+                                    Wrap: =false
+                                    Y: =DataCardKey13.Y
+                        - CAP_DataCard2:
+                            Control: TypedDataCard@1.0.7
+                            Variant: ClassicTextualEdit
+                            IsLocked: true
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              DataField: ="CAP"
+                              Default: =ThisItem.CAP
+                              DisplayName: =DataSourceInfo([@'Clienti-BC'],DataSourceInfo.DisplayName,CAP)
+                              MaxLength: =DataSourceInfo([@'Clienti-BC'], DataSourceInfo.MaxLength, CAP)
+                              Required: =false
+                              Update: =DataCardValue17.Text
+                              Width: =450
+                              X: =0
+                              Y: =1
+                            Children:
+                              - DataCardKey17:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldName
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =34
+                                    Text: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    Wrap: =false
+                                    X: =30
+                                    Y: =10
+                              - DataCardValue17:
+                                  Control: Classic/TextInput@2.3.2
+                                  MetadataKey: FieldValue
+                                  Properties:
+                                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                    Default: =Parent.Default
+                                    DelayOutput: =true
+                                    DisplayMode: =Parent.DisplayMode
+                                    Font: =Font.'Open Sans'
+                                    HoverBorderColor: =RGBA(0, 18, 107, 1)
+                                    HoverFill: =RGBA(186, 202, 226, 1)
+                                    MaxLength: =Parent.MaxLength
+                                    PaddingLeft: =5
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Tooltip: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardKey17.Y + DataCardKey17.Height + 5
+                              - ErrorMessage17:
+                                  Control: Label@2.5.1
+                                  MetadataKey: ErrorMessage
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(168, 0, 0, 1)
+                                    Font: =Font.'Open Sans'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =10
+                                    Live: =Live.Assertive
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =Parent.Error
+                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardValue17.Y + DataCardValue17.Height
+                              - StarVisible17:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldRequired
+                                  Properties:
+                                    Align: =Align.Center
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =DataCardKey17.Height
+                                    Text: ="*"
+                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                    Width: =30
+                                    Wrap: =false
+                                    Y: =DataCardKey17.Y
+                        - Cod agente_DataCard2:
+                            Control: TypedDataCard@1.0.7
+                            Variant: ClassicTextualEdit
+                            IsLocked: true
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              DataField: ="Cod_x0020_agente"
+                              Default: =ThisItem.'Cod agente'
+                              DisplayName: =DataSourceInfo([@'Clienti-BC'],DataSourceInfo.DisplayName,'Cod agente')
+                              MaxLength: =DataSourceInfo([@'Clienti-BC'], DataSourceInfo.MaxLength, 'Cod agente')
+                              Required: =false
+                              Update: =DataCardValue20.Text
+                              Width: =450
+                              X: =1
+                              Y: =1
+                            Children:
+                              - DataCardKey20:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldName
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =34
+                                    Text: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    Wrap: =false
+                                    X: =30
+                                    Y: =10
+                              - DataCardValue20:
+                                  Control: Classic/TextInput@2.3.2
+                                  MetadataKey: FieldValue
+                                  Properties:
+                                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                    Default: =Parent.Default
+                                    DelayOutput: =true
+                                    DisplayMode: =Parent.DisplayMode
+                                    Font: =Font.'Open Sans'
+                                    HoverBorderColor: =RGBA(0, 18, 107, 1)
+                                    HoverFill: =RGBA(186, 202, 226, 1)
+                                    MaxLength: =Parent.MaxLength
+                                    PaddingLeft: =5
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Tooltip: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardKey20.Y + DataCardKey20.Height + 5
+                              - ErrorMessage20:
+                                  Control: Label@2.5.1
+                                  MetadataKey: ErrorMessage
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(168, 0, 0, 1)
+                                    Font: =Font.'Open Sans'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =10
+                                    Live: =Live.Assertive
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =Parent.Error
+                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardValue20.Y + DataCardValue20.Height
+                              - StarVisible20:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldRequired
+                                  Properties:
+                                    Align: =Align.Center
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =DataCardKey20.Height
+                                    Text: ="*"
+                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                    Width: =30
+                                    Wrap: =false
+                                    Y: =DataCardKey20.Y
+                        - Contatto_DataCard1:
+                            Control: TypedDataCard@1.0.7
+                            Variant: ClassicTextualEdit
+                            IsLocked: true
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              DataField: ="Contatto"
+                              Default: =ThisItem.Contatto
+                              DisplayName: =DataSourceInfo([@'Clienti-BC'],DataSourceInfo.DisplayName,Contatto)
+                              MaxLength: =DataSourceInfo([@'Clienti-BC'], DataSourceInfo.MaxLength, Contatto)
+                              Required: =false
+                              Update: =DataCardValue21.Text
+                              Width: =450
+                              X: =2
+                              Y: =1
+                            Children:
+                              - DataCardKey21:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldName
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =34
+                                    Text: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    Wrap: =false
+                                    X: =30
+                                    Y: =10
+                              - DataCardValue21:
+                                  Control: Classic/TextInput@2.3.2
+                                  MetadataKey: FieldValue
+                                  Properties:
+                                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                    Default: =Parent.Default
+                                    DelayOutput: =true
+                                    DisplayMode: =Parent.DisplayMode
+                                    Font: =Font.'Open Sans'
+                                    HoverBorderColor: =RGBA(0, 18, 107, 1)
+                                    HoverFill: =RGBA(186, 202, 226, 1)
+                                    MaxLength: =Parent.MaxLength
+                                    PaddingLeft: =5
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Tooltip: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardKey21.Y + DataCardKey21.Height + 5
+                              - ErrorMessage21:
+                                  Control: Label@2.5.1
+                                  MetadataKey: ErrorMessage
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(168, 0, 0, 1)
+                                    Font: =Font.'Open Sans'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =10
+                                    Live: =Live.Assertive
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =Parent.Error
+                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardValue21.Y + DataCardValue21.Height
+                              - StarVisible21:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldRequired
+                                  Properties:
+                                    Align: =Align.Center
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =DataCardKey21.Height
+                                    Text: ="*"
+                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                    Width: =30
+                                    Wrap: =false
+                                    Y: =DataCardKey21.Y
+                        - Cod valuta_DataCard1:
+                            Control: TypedDataCard@1.0.7
+                            Variant: ClassicTextualEdit
+                            IsLocked: true
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              DataField: ="Cod_x0020_valuta"
+                              Default: =ThisItem.'Cod valuta'
+                              DisplayName: =DataSourceInfo([@'Clienti-BC'],DataSourceInfo.DisplayName,'Cod valuta')
+                              MaxLength: =DataSourceInfo([@'Clienti-BC'], DataSourceInfo.MaxLength, 'Cod valuta')
+                              Required: =false
+                              Update: =DataCardValue22.Text
+                              Width: =450
+                              X: =0
+                              Y: =2
+                            Children:
+                              - DataCardKey22:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldName
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =34
+                                    Text: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    Wrap: =false
+                                    X: =30
+                                    Y: =10
+                              - DataCardValue22:
+                                  Control: Classic/TextInput@2.3.2
+                                  MetadataKey: FieldValue
+                                  Properties:
+                                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                    Default: =Parent.Default
+                                    DelayOutput: =true
+                                    DisplayMode: =Parent.DisplayMode
+                                    Font: =Font.'Open Sans'
+                                    HoverBorderColor: =RGBA(0, 18, 107, 1)
+                                    HoverFill: =RGBA(186, 202, 226, 1)
+                                    MaxLength: =Parent.MaxLength
+                                    PaddingLeft: =5
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Tooltip: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardKey22.Y + DataCardKey22.Height + 5
+                              - ErrorMessage22:
+                                  Control: Label@2.5.1
+                                  MetadataKey: ErrorMessage
+                                  Properties:
+                                    AutoHeight: =true
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(168, 0, 0, 1)
+                                    Font: =Font.'Open Sans'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =10
+                                    Live: =Live.Assertive
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =Parent.Error
+                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardValue22.Y + DataCardValue22.Height
+                              - StarVisible22:
+                                  Control: Label@2.5.1
+                                  MetadataKey: FieldRequired
+                                  Properties:
+                                    Align: =Align.Center
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Height: =DataCardKey22.Height
+                                    Text: ="*"
+                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                    Width: =30
+                                    Wrap: =false
+                                    Y: =DataCardKey22.Y
+                  - Button11:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =RGBA(56, 96, 178, 1)
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: |-
+                          =SubmitForm(Form2); 
+                          UpdateContext({varMostraNuovoCliente: false}); 
+                          Notify("Cliente salvato correttamente!", NotificationType.Success)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: ="Salva Cliente"
+                        Visible: =varMostraNuovoCliente
+      - btnFiltroSenzaAgente:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =ColorFade(Self.Fill, -15%)
+            Color: |-
+              =If(
+                  varFiltroSenzaAgente, 
+                  RGBA(15, 34, 64, 1), 
+                  RGBA(255, 255, 255, 1)
+              )
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: |-
+              =If(
+                  varFiltroSenzaAgente, 
+                  RGBA(255, 248, 205, 1), 
+                  RGBA(15, 34, 64, 1)
+              )
+            Font: =Font.'Open Sans'
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+            OnSelect: =Set(varFiltroSenzaAgente, !varFiltroSenzaAgente)
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Self.Color
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Text: |-
+              ="🔬 Clienti non assegnati"
+            Visible: =If(varUtenteCorrente.Role = "Manager", true, false)
+            Width: =300
+            X: =702
+            Y: =104
+      - btnNuovoCliente:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =ColorFade(Self.Fill, -15%)
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =ColorValue("#1B3A5C")
+            Font: =Font.'Open Sans'
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+            OnSelect: |-
+              =Set(varClienteModifica, Blank());
+              Reset(txtNuovoNome); Reset(txtNuovoContatto); Reset(txtNuovoIndirizzo);
+              Reset(txtNuovoCitta); Reset(txtNuovoProvincia); Reset(txtNuovoCAP);
+              Set(varPopupNuovoCliente, true)
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Self.Color
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Text: ="➕ Nuovo cliente"
+            Width: =300
+            X: =1032
+            Y: =104
+      - cntrOverlayAnagraficaCliente:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            BorderColor: =Color.DarkGray
+            BorderThickness: =2
+            Fill: =RGBA(0,0,0,60%)
+            Height: =Parent.Height
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Visible: =varPopupCliente|| varPopupNuovoCliente
+            Width: =Parent.Width
+          Children:
+            - rctTornaIndietroCstmr:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Fill: =Color.Transparent
+                  Height: =Parent.Height
+                  OnSelect: |-
+                    =If(
+                        varPopupNuovoCliente,
+                        Reset(txtNuovoNome); Reset(txtNuovoContatto); Reset(txtNuovoIndirizzo);
+                        Reset(txtNuovoCitta); Reset(txtNuovoProvincia); Reset(txtNuovoCAP);
+                        Set(varPopupNuovoCliente, false),
+                        varPopupElimina,
+                        Set(varPopupElimina, false),
+                        varPopupCliente,
+                        Set(varPopupCliente, false)
+                    )
+                  Width: =Parent.Width
+            - cntSchedaCliente:
+                Control: GroupContainer@1.5.0
+                Variant: ManualLayout
+                Properties:
+                  BorderColor: =Color.DarkGray
+                  BorderThickness: =3
+                  Fill: =TemaNewY.LuceSuperficie
+                  Height: =Parent.Height/1.5
+                  RadiusBottomLeft: =12
+                  RadiusBottomRight: =12
+                  RadiusTopLeft: =12
+                  RadiusTopRight: =12
+                  Visible: =!varPopupElimina
+                  Width: =Parent.Width/1.5
+                  X: =(Parent.Width - Self.Width) / 2
+                  Y: =(Parent.Height - Self.Height) / 2
+                Children:
+                  - cntSpecificheCliente:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =RGBA(0,0,0,0)
+                        Height: =363
+                        LayoutDirection: =LayoutDirection.Vertical
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        RadiusBottomLeft: =20
+                        RadiusBottomRight: =20
+                        RadiusTopLeft: =20
+                        RadiusTopRight: =20
+                        Width: =464
+                        X: =376
+                        Y: =28
+                      Children:
+                        - lblNomeCliente:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Font: =Font.Arial
+                              FontWeight: =FontWeight.Bold
+                              Italic: =true
+                              Size: =20
+                              Text: =varClienteSel.Nome
+                              Width: =Parent.Width-20
+                              X: =419
+                              Y: =60
+                        - Label25_5:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Font: =Font.Arial
+                              FontWeight: =FontWeight.Bold
+                              Size: =16
+                              Text: |-
+                                ="Codice: " & varClienteSel.ID
+                              Width: =Parent.Width-20
+                              X: =419
+                              Y: =60
+                        - cntSpecificheClienteDettaglio:
+                            Control: GroupContainer@1.5.0
+                            Variant: AutoLayout
+                            Properties:
+                              BorderStyle: =BorderStyle.Dotted
+                              BorderThickness: |+
+                                =0
+                              Height: =Parent.Height-50
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =10
+                              PaddingBottom: =8
+                              PaddingLeft: =8
+                              PaddingRight: =8
+                              PaddingTop: =8
+                              RadiusBottomLeft: =20
+                              RadiusBottomRight: =20
+                              RadiusTopLeft: =20
+                              RadiusTopRight: =20
+                              Width: =Parent.Width
+                              X: =376
+                              Y: =28
+                            Children:
+                              - Label25_1:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.Arial
+                                    FontWeight: =FontWeight.Bold
+                                    Size: =18
+                                    Text: |-
+                                      ="👤  " & Coalesce(varClienteSel.Contatto, "—")
+                                    Width: =Parent.Width-20
+                                    X: =419
+                                    Y: =60
+                              - Label25_2:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.Arial
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =60
+                                    Size: =18
+                                    Text: |-
+                                      ="📍  " & Coalesce(varClienteSel.Indirizzo, "—") & ", " & Coalesce(varClienteSel.Città, "") & " " & Coalesce(varClienteSel.Provincia, "")
+                                    Width: =Parent.Width-20
+                                    X: =419
+                                    Y: =60
+                              - Label25_3:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.Arial
+                                    FontWeight: =FontWeight.Bold
+                                    Size: =18
+                                    Text: |-
+                                      ="🌍  " & Coalesce(varClienteSel.CAP, "—") & "  •  " & Coalesce(varClienteSel.'Cod paese', "")
+                                    Width: =Parent.Width-20
+                                    X: =419
+                                    Y: =60
+                              - Label25_4:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.Arial
+                                    FontWeight: =FontWeight.Bold
+                                    Size: =18
+                                    Text: |-
+                                      ="💰  " & Coalesce(varClienteSel.'Cod valuta', "EUR")
+                                    Width: =Parent.Width
+                                    X: =419
+                                    Y: =60
+                              - Label25_6:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.Arial
+                                    FontWeight: =FontWeight.Bold
+                                    Size: =18
+                                    Text: |-
+                                      ="🧑‍💼  Agente: " & Coalesce(varClienteSel.'Cod agente', "—")
+                                    Width: =Parent.Width-20
+                                    X: =419
+                                    Y: =60
+                  - imgCliente:
+                      Control: Image@2.2.3
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Height: =250
+                        RadiusBottomLeft: =Self.Width / 2
+                        RadiusBottomRight: =Self.Width / 2
+                        RadiusTopLeft: =Self.Width / 2
+                        RadiusTopRight: =Self.Width / 2
+                        Width: =250
+                        X: =60
+                        Y: =84
+                  - btnNuovoOrdineCliente:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        Height: =60
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =Set(varClienteOrdine, varClienteSel);
+                          Set(varOrdineAttivo, true);
+                          ClearCollect(colRigheOrdine, []);
+                          Set(varPopupCliente, false);
+                          Navigate(scrProducts)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: ="➕ Nuovo ordine"
+                        Visible: =varUtenteCorrente.Role <> "Manager"
+                        Width: =200
+                        X: =35
+                        Y: =435
+                  - btnEliminazioneCliente:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =Color.White
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =RGBA(220, 53, 69, 1)
+                        Font: =Font.'Open Sans'
+                        Height: =60
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: =Set(varPopupElimina, true)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: |-
+                          ="🗑 Richiedi eliminazione"
+                        Visible: =varUtenteCorrente.Role <> "Manager"
+                        Width: =200
+                        X: =693
+                        Y: =435
+                  - btnStoricoOrdini:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =Color.LightSlateGray
+                        Font: =Font.'Open Sans'
+                        Height: =60
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: =Set(varClienteSelezionato, lblNomeCliente.Text); Navigate(scrOrders)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: |-
+                          ="📦 Storico Ordini"
+                        Width: =200
+                        X: |-
+                          =If(
+                              varRuoloUtente = "Manager",
+                              (Parent.Width - Self.Width)/2,
+                              253
+                          )
+                        Y: =435
+                  - btnEliminazioneCliente_1:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =Color.White
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =Color.Orange
+                        Font: =Font.'Open Sans'
+                        Height: =60
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =Patch(
+                              'Notifiche-BC',
+                              Defaults('Notifiche-BC'),
+                              {
+                                  Title: "Richiesta distacco: " & varClienteSel.Nome,
+                                  TipoNotifica: { Value: "RichiestaDistaccoCliente" },
+                                  Mittente: Left(varUtenteCorrente.Email, Find("@", varUtenteCorrente.Email) - 1),
+                                  Destinatario: "Manager",
+                                  Messaggio: "Richiesta distacco per " & varClienteSel.Nome & " (ID " & varClienteSel.ID & ") — " & InptMotivazione.Text,
+                                  Letta: false,
+                                  Data: Now(),
+                                  LinkRif: Text(varClienteSel.ID)
+                              }
+                          );
+                          Notify("Richiesta inviata al Manager", NotificationType.Success);
+                          Reset(InptMotivazione);
+                          Set(varPopupCliente, false)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: ="➡️ Richiedi Distacco"
+                        Visible: =varUtenteCorrente.Role <> "Manager"
+                        Width: =200
+                        X: =471
+                        Y: =435
+                  - Icon5:
+                      Control: Classic/Icon@2.5.0
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =RGBA(0, 18, 107, 1)
+                        Height: =30
+                        Icon: =Icon.Draw
+                        OnSelect: |-
+                          =Set(varClienteModifica, varClienteSel);
+                          Reset(txtNuovoNome); Reset(txtNuovoContatto); Reset(txtNuovoIndirizzo);
+                          Reset(txtNuovoCitta); Reset(txtNuovoProvincia); Reset(txtNuovoCAP);
+                          Set(varPopupNuovoCliente, true)
+                        Visible: =!varPopupNuovoCliente && !varPopupElimina
+                        Width: =30
+                        X: =40
+                        Y: =40
+                  - btnEliminaClienteDefinitivo:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =Color.DarkRed
+                        Font: =Font.'Open Sans'
+                        Height: =60
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =Patch('Clienti-BC', LookUp('Clienti-BC', ID = varClienteSel.ID), { Attivo: false });
+                          Set(varPopupCliente, false);
+                          Notify("Cliente disattivato definitivamente", NotificationType.Success)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: |-
+                          =" ""🗑 Elimina cliente"""
+                        Visible: =varUtenteCorrente.Role = "Manager"
+                        Width: =200
+                        X: =Parent.Width - Self.Width - 70
+                        Y: =435
+                  - btnAssegnaAgente:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =Color.LightSkyBlue
+                        Font: =Font.'Open Sans'
+                        Height: =60
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: =Set(varPopupAssegnaAgente, true)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: |-
+                          ="🔄 Assegna agente"
+                        Visible: =varUtenteCorrente.Role = "Manager"
+                        Width: =200
+                        X: =cntSchedaCliente.X -150
+                        Y: =435
+                  - cntDrpDwnSelNuovoAgente:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        Fill: =TemaNewY.LuceSuperficie
+                        Visible: |+
+                          =varPopupAssegnaAgente
+                        X: =Parent.X
+                        Y: =Parent.Y
+                      Children:
+                        - Label4:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              Size: =16
+                              Text: ="SELEZIONA IL NUOVO AGENTE"
+                              Width: =Parent.Width
+                        - drpNuovoAgente:
+                            Control: Classic/DropDown@2.3.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              ChevronBackground: =RGBA(56, 96, 178, 1)
+                              ChevronFill: =RGBA(255, 255, 255, 1)
+                              ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                              Font: =Font.'Open Sans'
+                              HoverFill: =RGBA(186, 202, 226, 1)
+                              Items: =Distinct(Filter('Clienti-BC', !IsBlank('Cod agente')), 'Cod agente')
+                              Items.Value: =Value
+                              PressedColor: =RGBA(255, 255, 255, 1)
+                              PressedFill: =RGBA(0, 18, 107, 1)
+                              SelectionColor: =RGBA(255, 255, 255, 1)
+                              SelectionFill: =RGBA(56, 96, 178, 1)
+                              X: =86
+                              Y: =74
+                        - Button10:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =TemaNewY.Successo
+                              Font: =Font.'Open Sans'
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(40, 167, 69, 1), -50%)
+                              OnSelect: |+
+                                =Patch('Clienti-BC', LookUp('Clienti-BC', ID = varClienteSel.ID), { 'Cod agente': drpNuovoAgente.Selected.Value });
+                                Set(varPopupAssegnaAgente, false);
+                                Notify("Nuovo agente assegnato", NotificationType.Success);
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              Text: ="Conferma"
+                              X: =170
+                              Y: =137
+            - cntFormEliminazioneCliente:
+                Control: GroupContainer@1.5.0
+                Variant: ManualLayout
+                Properties:
+                  Fill: =TemaNewY.LuceSuperficie
+                  Height: =473
+                  RadiusBottomLeft: =30
+                  RadiusBottomRight: =30
+                  RadiusTopLeft: =30
+                  RadiusTopRight: =30
+                  Visible: =varPopupElimina
+                  Width: =800
+                  X: =(Parent.Width - Self.Width) / 2
+                  Y: =144
+                Children:
+                  - Button5:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =Color.DarkRed
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =Reset(InptMotivazione);
+                          Set(varPopupElimina, false)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: ="Annulla"
+                        Width: =Parent.Width/3
+                        X: =449
+                        Y: =Parent.Height - 65
+                  - Button6:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.Successo
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =Patch(
+                              'Notifiche-BC',
+                              Defaults('Notifiche-BC'),
+                              {
+                                  Title: "Richiesta eliminazione: " & varClienteSel.Nome,
+                                  TipoNotifica: { Value: "RichiestaEliminazioneCliente" },
+                                  Mittente: Left(varUtenteCorrente.Email, Find("@", varUtenteCorrente.Email) - 1),
+                                  Destinatario: "Manager",
+                                  Messaggio: "Richiesta eliminazione per " & varClienteSel.Nome & " (ID " & varClienteSel.ID & ") — " & InptMotivazione.Text,
+                                  Letta: false,
+                                  Data: Now(),
+                                  LinkRif: Text(varClienteSel.ID)
+                              }
+                          );
+                          Notify("Richiesta inviata al Manager", NotificationType.Success);
+                          Reset(InptMotivazione);
+                          Set(varPopupElimina, false)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: |-
+                          ="📨 Invia richiesta"
+                        Width: =Parent.Width/3
+                        X: =110
+                        Y: =Parent.Height - 65
+                  - InptMotivazione:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Default: =""
+                        Font: =Font.'Open Sans'
+                        Height: =192
+                        HintText: ="Es. cliente cessato, anagrafica duplicata..."
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Mode: =TextMode.MultiLine
+                        Width: =Parent.Width - 50
+                        X: =25
+                        Y: =166
+                  - lblRichiestaEliminazione:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =RGBA(13, 27, 62, 1)
+                        Fill: =TemaNewY.AccentiDorati
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Height: =69
+                        Size: =17
+                        Text: |-
+                          =Upper("  ‼  ️Richiesta eliminazione: ") & varClienteSel.Nome & "  ‼ ️"
+                        Width: =Parent.Width - 50
+                        X: =25
+                        Y: =20
+                  - lblMotivazione:
+                      Control: Label@2.5.1
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Semibold
+                        Size: =20
+                        Text: ="Motivazione:"
+                        Width: =Parent.Width/3
+                        X: =25
+                        Y: =107
+            - cntFormNuovoCliente:
+                Control: GroupContainer@1.5.0
+                Variant: ManualLayout
+                Properties:
+                  Fill: =TemaNewY.LuceSuperficie
+                  Height: =Parent.Height/1.5
+                  RadiusBottomLeft: =12
+                  RadiusBottomRight: =12
+                  RadiusTopLeft: =12
+                  RadiusTopRight: =12
+                  Visible: =varPopupNuovoCliente
+                  Width: =Parent.Width/1.5
+                  X: =(Parent.Width - Self.Width) / 2
+                  Y: =(Parent.Height - Self.Height) / 2
+                Children:
+                  - lblTitoloAnagraficaNuovoCliente:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Lato Black'
+                        FontWeight: =FontWeight.Bold
+                        Size: =25
+                        Text: =Upper("anagrafica nuovo cliente")
+                        Width: =Parent.Width
+                        Y: =5
+                  - txtNuovoNome:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        BorderColor: =Color.DarkGray
+                        BorderThickness: =3
+                        Default: =Coalesce(varClienteModifica.Nome, "")
+                        Font: =Font.'Open Sans'
+                        HintText: ="Ragione sociale"
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Width: = Parent.Width - 50
+                        X: =25
+                        Y: =65
+                  - txtNuovoContatto:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        BorderColor: =Color.DarkGray
+                        BorderThickness: =3
+                        Default: =Coalesce(varClienteModifica.Contatto, "")
+                        Font: =Font.'Open Sans'
+                        HintText: ="Referente"
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Width: = Parent.Width - 50
+                        X: =25
+                        Y: =txtNuovoNome.Y + txtNuovoNome.Height + 22
+                  - txtNuovoIndirizzo:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        BorderColor: =Color.DarkGray
+                        BorderThickness: =3
+                        Default: =Coalesce(varClienteModifica.Indirizzo, "")
+                        Font: =Font.'Open Sans'
+                        HintText: ="Via/Indirizzo"
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Width: = Parent.Width - 50
+                        X: =25
+                        Y: =txtNuovoContatto.Y + txtNuovoContatto.Height + 22
+                  - txtNuovoCitta:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        BorderColor: =Color.DarkGray
+                        BorderThickness: =3
+                        Default: =Coalesce(varClienteModifica.Città, "")
+                        Font: =Font.'Open Sans'
+                        HintText: ="Città"
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Width: =(Parent.Width - 60) / 2
+                        X: =25
+                        Y: =txtNuovoIndirizzo.Y + txtNuovoIndirizzo.Height + 22
+                  - txtNuovoProvincia:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        BorderColor: =Color.DarkGray
+                        BorderThickness: =3
+                        Default: =Coalesce(varClienteModifica.Provincia, "")
+                        Font: =Font.'Open Sans'
+                        HintText: ="Prov."
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Width: =(Parent.Width - 60) / 2
+                        X: =txtNuovoCitta.X + txtNuovoCitta.Width + 10
+                        Y: =txtNuovoCitta.Y
+                  - txtNuovoCAP:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        BorderColor: =Color.DarkGray
+                        BorderThickness: =3
+                        Default: =Coalesce(varClienteModifica.CAP, "")
+                        Font: =Font.'Open Sans'
+                        HintText: ="CAP"
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Width: =(Parent.Width - 60) / 2
+                        X: =25
+                        Y: =txtNuovoCitta.Y + txtNuovoCitta.Height + 22
+                  - BtnCreaCliente:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =RGBA(25,135,84,1)
+                        Font: =Font.'Open Sans'
+                        Height: =45
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =If(
+                              IsBlank(txtNuovoNome.Text),
+                              Notify("Il nome è obbligatorio", NotificationType.Error),
+                              Patch(
+                              'Clienti-BC',
+                              If(IsBlank(varClienteModifica), Defaults('Clienti-BC'), varClienteModifica),
+                              {
+                                  Nome: txtNuovoNome.Text,
+                                  Contatto: txtNuovoContatto.Text,
+                                  Indirizzo: txtNuovoIndirizzo.Text,
+                                  Città: txtNuovoCitta.Text,
+                                  Provincia: txtNuovoProvincia.Text,
+                                  CAP: txtNuovoCAP.Text
+                              }
+                          );
+                              Notify(If(IsBlank(varClienteModifica), "Cliente creato!", "Cliente aggiornato!"), NotificationType.Success);
+                              Set(varClienteModifica, Blank());
+                              Set(varPopupNuovoCliente, false)
+                          )
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: =If(IsBlank(varClienteModifica), "CREA CLIENTE", "SALVA MODIFICHE")
+                        Width: =200
+                        X: =Parent.Width * 0.25 - Self.Width / 2
+                        Y: = txtNuovoCAP.Y + txtNuovoCAP.Height + 45
+                  - btnAnnullaCreazione:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =Color.DarkRed
+                        Font: =Font.'Open Sans'
+                        Height: =45
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =Reset(txtNuovoNome); Reset(txtNuovoContatto); Reset(txtNuovoIndirizzo);
+                          Reset(txtNuovoCitta); Reset(txtNuovoProvincia); Reset(txtNuovoCAP);
+                          Set(varPopupNuovoCliente, false)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: =Upper("annulla")
+                        Width: =200
+                        X: =Parent.Width * 0.75 - Self.Width / 2
+                        Y: =txtNuovoCAP.Y + txtNuovoCAP.Height + 45
+      - cntMenu_4:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =TemaNewY.BluPrimario
+            Height: =713
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =5
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Visible: =varMenuAperto
+            Width: |-
+              =If(
+                  varMenuAperto,
+                  230,
+                  0
+              )
+            X: =
+            Y: =55
+          Children:
+            - Container26_8:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  AlignInContainer: =AlignInContainer.SetByContainer
+                  FillPortions: =0
+                  Height: |+
+                    =300
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =2
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =0
+                  RadiusTopRight: |
+                    =0
+                  Width: =Parent.Width-10
+                Children:
+                  - lblAgent_4:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =TemaNewY.AccentiDorati
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="AGENT"
+                        Visible: =Lower(varRuoloUtente) = "agent"
+                        Width: =Parent.Width
+                        X: =40
+                        Y: =40
+                  - lblMANAGER_4:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =TemaNewY.AccentiDorati
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="MANAGER"
+                        Visible: =Lower(varRuoloUtente) <> "agent"
+                        Width: =Parent.Width
+                  - BtnDashboard_4:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        Height: =42
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =varRuoloUtente = "Manager" || varRuoloUtente = "Office"
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="📊 DASHBOARD"
+                        Visible: =Lower(varRuoloUtente) <> "agent"
+                        Width: =Parent.Width - 24
+                  - BtnOrders_4:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrOrders, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="🛒 ORDERS"
+                        Visible: =Lower(varRuoloUtente) <> "agent"
+                        Width: =Parent.Width - 24
+                  - BtnCustomers_4:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrCustomers, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="👩💼 CUSTOMERS"
+                        Width: =Parent.Width - 24
+                  - BtnReports_4:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrReports, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="📑 REPORTS"
+                        Visible: =varRuoloUtente = "Manager"
+                        Width: =Parent.Width - 24
+                  - Button1_12:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =Color.Transparent
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Height: =
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrCustomers, ScreenTransition.Fade)
+                        PressedBorderColor: =
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =25
+                        Text: |-
+                          ="👩‍💼 CUSTOMERS"
+                        Width: =Parent.Width
+                  - BtnProduct_9:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =Navigate(scrProducts, ScreenTransition.Fade);
+                          Set(varOrdineAttivo, false);
+                          Set(varClienteOrdine, Blank());
+                          Clear(colRigheOrdine);
+                          Navigate(scrProducts)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: |-
+                          ="📊 PRODUCTS"
+                        Width: =Parent.Width - 24
+            - Container26_9:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  AlignInContainer: =AlignInContainer.SetByContainer
+                  FillPortions: =0
+                  Height: =280
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =2
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =0
+                  RadiusTopRight: |
+                    =0
+                  Width: =Parent.Width-10
+                  Y: |
+                    =40
+            - Image2_15:
+                Control: Image@2.2.3
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Image: ='new-y_logo_sign'
+                  OnSelect: =Navigate('HP-MANAGER', ScreenTransition.Fade)
+                  X: =
+                  Y: =
+      - cntHambrg_4:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: |-
+              =If(
+                  varMenuAperto,
+                  TemaNewY.BluPrimario ,   // Blu scuro
+                  Color.Transparent
+              )
+            Height: =55
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            PaddingBottom: =8
+            PaddingRight: |
+              =8
+            Width: =228
+          Children:
+            - Icon4_5:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =TemaNewY.LuceSuperficie
+                  Height: =40
+                  Icon: =Icon.Hamburger
+                  OnSelect: =Set(varMenuAperto, !varMenuAperto)
+                  Width: =50
+                  X: |-
+                    =If(
+                        varMenuAperto,
+                        cntMenu_4.Width + 15,
+                        Icon4_5.Width + 15
+                    ) + cntHambrg_4.X
+                  Y: =
+      - Label6_4:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =TemaNewY.AccentiDorati
+            Font: =Font.'Open Sans'
+            Height: =28
+            Size: =8
+            Text: |-
+              ="🔐 In Arrivo"
+            Visible: =BtnReports.Visible && varMenuAperto
+            Width: =63
+            X: =142
+            Y: =248

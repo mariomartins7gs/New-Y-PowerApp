@@ -1,0 +1,1233 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  scrOrders:
+    Properties:
+      Fill: =TemaNewY.ScuroPrimario
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+      OnHidden: =Reset(txtSearchOrders_2)
+      OnVisible: |-
+        =UpdateContext({varFiltroStatus: "All"}) ; varRuoloUtente <> "Agent";Set(varMenuAperto, false);
+    Children:
+      - cntHomepage_12:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =TemaNewY.ScuroPrimario
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Width: |
+              =
+              Parent.Width - If(
+                  varMenuAperto,
+                  cntMenu.Width,
+                  0
+              )
+            X: |-
+              =If(
+                  varMenuAperto,
+                  cntMenu.Width,
+                  0
+              )
+          Children:
+            - cntHeader_10:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  FillPortions: =0
+                  Height: |
+                    =Parent.Height/9
+                  LayoutAlignItems: =LayoutJustifyContent.SpaceBetween
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                Children:
+                  - Container7_1:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =300
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        Width: |
+                          =Parent.Width/3
+                      Children:
+                        - Label1_13:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =TemaNewY.LuceSuperficie
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =30
+                              Text: ="ORDERS"
+                              Width: =500
+                              X: |
+                                =
+            - cntBottom_12:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  AlignInContainer: =AlignInContainer.Center
+                  Fill: =Color.Transparent
+                  Height: |
+                    =Parent.Height*2/3
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =14
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusTopRight: =16
+                  Width: |
+                    =Parent.Width
+                  Y: =cntHeader_10.Height
+                Children:
+                  - Container28:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Center
+                        FillPortions: =0
+                        Height: =60
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =10
+                        LayoutMinHeight: =5
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        Width: |+
+                          =
+                          Parent.Width - If(
+                              varMenuAperto,
+                              cntMenu.Width,
+                              0
+                          )
+                      Children:
+                        - txtSearchOrders_2:
+                            Control: Classic/TextInput@2.3.2
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Default: =""
+                              Font: =Font.'Open Sans'
+                              HintText: |-
+                                ="🔍Search by order ID, customer, or date..."
+                              HoverBorderColor: =RGBA(0, 18, 107, 1)
+                              HoverFill: =RGBA(186, 202, 226, 1)
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              RadiusBottomLeft: =20
+                              RadiusBottomRight: =20
+                              RadiusTopLeft: =20
+                              RadiusTopRight: =20
+                              Width: =Parent.Width/3
+                        - BtnTutti:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =If(varStatusSelecionado = "Aperto", ColorValue("#ffffff"), ColorValue("#ffffff"))
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: |-
+                                =If(
+                                    varStatusSelecionado = "Tutti", 
+                                    ColorValue("#2b4c96"), 
+                                    ColorValue("#1c2430")
+                                )
+                              Font: =Font.'Open Sans'
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: =Set(varClienteSelezionato, Blank()); Set(varStatusSelecionado, "Tutti")
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =30
+                              RadiusBottomRight: =30
+                              RadiusTopLeft: =30
+                              RadiusTopRight: =30
+                              Text: ="Tutti"
+                        - BtnAperto:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =If(varStatusSelecionado = "Aperto", ColorValue("#B87333"), ColorValue("#ffffff"))
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: |-
+                                =If(
+                                    varStatusSelecionado = "Aperto", 
+                                    ColorValue("#FDE6C7"), 
+                                    ColorValue("#1c2430")
+                                )
+                              Font: =Font.'Open Sans'
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =40
+                              OnSelect: =Set(varStatusSelecionado, "Aperto")
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =30
+                              RadiusBottomRight: =30
+                              RadiusTopLeft: =30
+                              RadiusTopRight: =30
+                              Text: ="Aperto"
+                        - BtnRilasciato:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =If(varStatusSelecionado = "Rilasciato", ColorValue("#0A58CA"), ColorValue("#ffffff"))
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: |-
+                                =If(
+                                    varStatusSelecionado = "Rilasciato", 
+                                    ColorValue("#CFE2FF"), 
+                                    ColorValue("#1c2430")
+                                )
+                              Font: =Font.'Open Sans'
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: =Set(varStatusSelecionado, "Rilasciato")
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =30
+                              RadiusBottomRight: =30
+                              RadiusTopLeft: =30
+                              RadiusTopRight: =30
+                              Text: ="Rilasciato"
+                        - BtnFatturato_1:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =If(varStatusSelecionado = "Fatturato", ColorValue("#6F42C1"), ColorValue("#ffffff"))
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: |-
+                                =If(
+                                    varStatusSelecionado = "Fatturato", 
+                                    ColorValue("#E5D4F5"), 
+                                    ColorValue("#1c2430")
+                                )
+                              Font: =Font.'Open Sans'
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              OnSelect: =Set(varStatusSelecionado, "Fatturato")
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =30
+                              RadiusBottomRight: =30
+                              RadiusTopLeft: =30
+                              RadiusTopRight: =30
+                              Text: ="Fatturato"
+                              X: =475
+                              Y: =110
+                        - BtnEvaso_1:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =If(varStatusSelecionado = "Aperto", ColorValue("#ffffff"), ColorValue("#ffffff"))
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: |-
+                                =If(
+                                    varStatusSelecionado = "Evaso", 
+                                    ColorValue("#1E4620"), 
+                                    ColorValue("#1c2430")
+                                )
+                              Font: =Font.'Open Sans'
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              OnSelect: =Set(varStatusSelecionado, "Evaso")
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =30
+                              RadiusBottomRight: =30
+                              RadiusTopLeft: =30
+                              RadiusTopRight: =30
+                              Text: ="Evaso"
+                              X: =160
+                              Y: =110
+                  - cntTableHeaders:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        FillPortions: =0
+                        Height: =50
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        Width: |+
+                          =
+                          Parent.Width - If(
+                              varMenuAperto,
+                              cntMenu.Width,
+                              0
+                          )
+                      Children:
+                        - Label53:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#F5F0EB")
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =16
+                              Text: |-
+                                ="ORDER #"
+                        - Label54:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#F5F0EB")
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =16
+                              Text: ="CUSTOMER"
+                        - Label55:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#F5F0EB")
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =16
+                              Text: ="DATE"
+                        - Label56:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#F5F0EB")
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =16
+                              Text: ="ITEMS"
+                        - Label57:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#F5F0EB")
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =16
+                              Text: ="TOTAL"
+                        - Label58:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#F5F0EB")
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =16
+                              Text: ="STATUS"
+                  - Gallery3:
+                      Control: Gallery@2.15.0
+                      Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+                      Properties:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Fill: =TemaNewY.LuceSuperficie
+                        Items: |-
+                          =Filter(
+                              'Ordini-BC',
+                              (IsBlank(varStatusSelecionado) Or varStatusSelecionado = "Tutti" Or Stato = varStatusSelecionado) And
+                              (IsBlank(varClienteSelezionato) Or Trim('Fatturare a - Nome') = Trim(varClienteSelezionato)) And
+                              (IsBlank(txtSearchOrders_2.Text) Or txtSearchOrders_2.Text in 'Fatturare a - Nome' Or txtSearchOrders_2.Text in Text(Nr))
+                          )
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                      Children:
+                        - Label3:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#5A6B7D")
+                              Font: =Font.'Open Sans'
+                              Text: |-
+                                =Text(
+                                    Sum(
+                                        Filter('RigheOrdini-BC', 'Nr documento' = ThisItem.Nr), 
+                                        Value(Substitute(Importo, ".", ","), "it-IT")
+                                    ), 
+                                    "[$-it-IT]€ #.##0,00"
+                                )
+                              X: =958
+                              Y: =20
+                        - Label22:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#5A6B7D")
+                              Font: =Font.'Open Sans'
+                              Size: =14
+                              Text: =CountRows(Filter('RigheOrdini-BC', 'Nr documento' = ThisItem.Nr))
+                              X: =724
+                              Y: =20
+                        - Label21:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: |-
+                                =Switch(
+                                    ThisItem.Stato,
+                                    "Aperto", RGBA(158, 65, 0, 1),        // marrone/arancio scuro
+                                    "Rilasciato", RGBA(20, 66, 130, 1),   // blu scuro
+                                    "Evaso", RGBA(30, 90, 40, 1),         // verde scuro
+                                    "Fatturato", RGBA(90, 40, 130, 1),    // viola scuro
+                                    RGBA(90, 90, 90, 1)                   // grigio scuro fallback
+                                )
+                              Fill: |-
+                                =Switch(
+                                    ThisItem.Stato,
+                                    "Aperto", RGBA(253, 230, 199, 1),     // pesca chiaro
+                                    "Rilasciato", RGBA(207, 226, 255, 1), // azzurro chiaro
+                                    "Evaso", RGBA(198, 239, 206, 1),      // verde chiaro
+                                    "Fatturato", RGBA(229, 212, 245, 1),  // lilla chiaro
+                                    RGBA(230, 230, 230, 1)                // grigio chiaro fallback
+                                )
+                              Font: =Font.'Open Sans'
+                              Text: =ThisItem.Stato
+                              X: =1160
+                              Y: =20
+                        - Subtitle9:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =ColorValue("#5A6B7D")
+                              Font: =Font.'Open Sans'
+                              FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                              Height: =41
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =14
+                              Text: =ThisItem.'Fatturare a - Nome'
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =275
+                              X: =216
+                              Y: =33
+                        - Label19:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =ColorValue("#5A6B7D")
+                              Font: =Font.'Open Sans'
+                              Height: =61
+                              OnSelect: =Select(Parent)
+                              Size: =14
+                              Text: =ThisItem.'Data ordine'
+                              Width: =121
+                              X: =480
+                              Y: =27
+                        - Button15:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(0, 82, 204, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =RGBA(0,0,0,0)
+                              Font: =Font.'Open Sans'
+                              Height: =33
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(0, 50, 150, 1)
+                              HoverFill: =RGBA(0,0,0,0)
+                              OnSelect: |-
+                                =Set(varPopDettaglioArticolo, true);
+                                Set(varOrdineSelezionato, ThisItem.Nr);
+                                ClearCollect(colRigheOrdineSel, Filter('RigheOrdini-BC', 'Nr documento' = ThisItem.Nr));
+                                Set(varMenuAperto,false)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Color.Transparent
+                              PressedFill: |+
+                                =Color.Transparent
+                              Text: =ThisItem.Nr
+                              Width: =94
+                              X: =16
+                              Y: =27
+                        - Rectangle1:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Fill: |-
+                                =Switch(
+                                    ThisItem.Stato,
+                                    "Aperto", RGBA(253, 230, 199, 1),     // pesca chiaro
+                                    "Rilasciato", RGBA(207, 226, 255, 1), // azzurro chiaro
+                                    "Evaso", RGBA(198, 239, 206, 1),      // verde chiaro
+                                    "Fatturato", RGBA(229, 212, 245, 1),  // lilla chiaro
+                                    RGBA(230, 230, 230, 1)                // grigio chiaro fallback
+                                )
+                              Height: =5
+                              OnSelect: =Select(Parent)
+                              Width: =Parent.TemplateWidth
+                              Y: =99
+      - rctTornaIndietroCstmr_1:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =RGBA(0,0,0,60%)
+            Height: =Parent.Height
+            OnSelect: |-
+              =Set(varPopDettaglioArticolo, false);
+              Set(varOrdineSelezionato, Blank());
+              Set(varClienteSel, Blank());
+              Set(varAnteprimaPdf,false)
+            Visible: =varPopDettaglioArticolo
+            Width: =Parent.Width
+      - cntSpecificaOrdineRiepilogo:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =TemaNewY.LuceSuperficie
+            Height: =Parent.Height*0.75
+            LayoutDirection: =LayoutDirection.Vertical
+            PaddingBottom: =20
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =20
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Visible: =varPopDettaglioArticolo
+            Width: =Parent.Width*0.75
+            X: =(Parent.Width - Self.Width) / 2
+            Y: =(Parent.Height - Self.Height) / 2
+          Children:
+            - Container8:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(240,235,225,1)
+                  FillPortions: =0
+                  Height: =Parent.Height/6
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =20
+                  RadiusTopRight: =20
+                Children:
+                  - lblRiepilogoOrdine:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: |-
+                          =Switch(
+                              LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato,
+                              "Aperto", RGBA(158, 65, 0, 1),
+                              "Rilasciato", RGBA(20, 66, 130, 1),
+                              "Evaso", RGBA(30, 90, 40, 1),
+                              "Fatturato", RGBA(90, 40, 130, 1),
+                              RGBA(60, 60, 60, 1)
+                          )
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Size: =20
+                        Text: ="Ordine " & varOrdineSelezionato & " · " & LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato & " · " & Text(LookUp('Ordini-BC', Nr = varOrdineSelezionato).'Data ordine', "gg/mm/aaaa")
+                        Width: =Parent.Width
+                  - lblClienteSintesi:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        Size: =17
+                        Text: |-
+                          ="👤" & LookUp('Ordini-BC', Nr = varOrdineSelezionato).'Fatturare a - Nome' & " — " & "📍" &LookUp('Ordini-BC', Nr = varOrdineSelezionato).'Fatturare a - Città'
+                        Width: =Parent.Width
+                        X: =40
+                        Y: =40
+            - Container12:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(240,235,225,1)
+                  FillPortions: =0
+                  Height: =Parent.Height/10
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutGap: =80
+                  LayoutJustifyContent: =LayoutJustifyContent.Center
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =20
+                  RadiusTopRight: =20
+                  X: =40
+                  Y: =40
+                Children:
+                  - Label49:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =RGBA(120,120,120,1)
+                        Fill: =RGBA(240,235,225,1)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Height: =50
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Size: =16
+                        Text: ="ARTICOLO"
+                  - Label49_1:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =RGBA(120,120,120,1)
+                        Fill: =RGBA(240,235,225,1)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Height: =50
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Size: =16
+                        Text: '= "QUANTITÀ"  '
+                  - Label49_2:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =RGBA(120,120,120,1)
+                        Fill: =RGBA(240,235,225,1)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Height: =50
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Size: =16
+                        Text: ="PREZZO"
+                  - Label49_3:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =RGBA(120,120,120,1)
+                        Fill: =RGBA(240,235,225,1)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Height: =50
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Size: =16
+                        Text: '="IMPORTO TOTALE" '
+            - Gallery7:
+                Control: Gallery@2.15.0
+                Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Height: =500
+                  Items: =Filter(colRigheOrdineSel, 'Nr documento' = varOrdineSelezionato)
+                  TemplateSize: =100
+                  X: =40
+                  Y: =40
+                Children:
+                  - Image10:
+                      Control: Image@2.2.3
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Height: =72
+                        Image: =LookUp('Articoli-BC', Nr = Text(ThisItem.Nr)).url
+                        OnSelect: =Select(Parent)
+                        RadiusBottomLeft: =8
+                        RadiusBottomRight: =8
+                        RadiusTopLeft: =8
+                        RadiusTopRight: =8
+                        Width: =72
+                        X: =16
+                        Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                  - Separator2:
+                      Control: Rectangle@2.3.0
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =8
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - Self.Height
+                  - Rectangle2:
+                      Control: Rectangle@2.3.0
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Fill: =RGBA(220,220,220,1)
+                        Height: =Parent.TemplateHeight - Separator2.Height
+                        OnSelect: =Select(Parent)
+                        Visible: =ThisItem.IsSelected
+                        Width: =4
+                  - Label52:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        Height: =86
+                        Text: =ThisItem.Descrizione
+                        X: =76
+                  - Label59:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        OnSelect: =Select(Parent)
+                        Text: = ThisItem.Quantità
+                        X: =298
+                        Y: =25
+                  - Label60:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Lighter
+                        OnSelect: =Select(Parent)
+                        Text: |-
+                          =Text(Value(ThisItem.'Prezzo unitario', "en-US"), "€ #,##0.00", "it-IT")
+                        X: =535
+                        Y: =25
+                  - Label61:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Right
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        OnSelect: =Select(Parent)
+                        Text: |-
+                          =Text(Value(ThisItem.Importo, "en-US"), "€ #,##0.00", "it-IT")
+                        X: =760
+                        Y: =25
+            - Container16:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =TemaNewY.LuceSuperficie
+                  FillPortions: =0
+                  Height: |+
+                    =60
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+      - Icon6_1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =Color.White
+            Fill: =Color.Gray
+            Height: =30
+            Icon: =Icon.Cancel
+            OnSelect: =Set(varPopupClienti,false)
+            Visible: =varPopupClienti
+            Width: =30
+            X: =1140
+            Y: =115
+      - Label24:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: "=Switch(\n    LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato,\n    \"Aperto\", RGBA(158, 65, 0, 1),\n    \"Rilasciato\", RGBA(20, 66, 130, 1),\n    \"Evaso\", RGBA(30, 90, 40, 1),\n    \"Fatturato\", RGBA(90, 40, 130, 1),\n    RGBA(90, 90, 90, 1)\n) "
+            Fill: |-
+              =Switch(
+                  LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato,
+                  "Aperto", RGBA(253, 230, 199, 1),
+                  "Rilasciato", RGBA(207, 226, 255, 1),
+                  "Evaso", RGBA(198, 239, 206, 1),
+                  "Fatturato", RGBA(229, 212, 245, 1),
+                  RGBA(230, 230, 230, 1)
+              )
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Text: =Upper(LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato)
+            Visible: =varPopDettaglioArticolo
+            Width: =218
+            X: =240
+            Y: =600
+      - Label30:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: |-
+              =Switch(
+                  LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato,
+                  "Aperto", RGBA(158, 65, 0, 1),
+                  "Rilasciato", RGBA(20, 66, 130, 1),
+                  "Evaso", RGBA(30, 90, 40, 1),
+                  "Fatturato", RGBA(90, 40, 130, 1),
+                  RGBA(90, 90, 90, 1)
+              )
+            Fill: |-
+              =Switch(
+                  LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato,
+                  "Aperto", RGBA(253, 230, 199, 1),
+                  "Rilasciato", RGBA(207, 226, 255, 1),
+                  "Evaso", RGBA(198, 239, 206, 1),
+                  "Fatturato", RGBA(229, 212, 245, 1),
+                  RGBA(230, 230, 230, 1)
+              )
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Text: |-
+              ="Totale ordine: " & Text(
+                  Sum(colRigheOrdineSel, Value(Importo, "en-US")),
+                  "€ #,##0.00",
+                  "it-IT"
+              )
+            Visible: =varPopDettaglioArticolo
+            Width: =225
+            X: =915
+            Y: =600
+      - Label24_1:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: |-
+              =Switch(
+                  LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato,
+                  "Aperto", RGBA(158, 65, 0, 1),
+                  "Rilasciato", RGBA(20, 66, 130, 1),
+                  "Evaso", RGBA(30, 90, 40, 1),
+                  "Fatturato", RGBA(90, 40, 130, 1),
+                  RGBA(90, 90, 90, 1)
+              )
+            Fill: |-
+              =Switch(
+                  LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato,
+                  "Aperto", RGBA(253, 230, 199, 1),
+                  "Rilasciato", RGBA(207, 226, 255, 1),
+                  "Evaso", RGBA(198, 239, 206, 1),
+                  "Fatturato", RGBA(229, 212, 245, 1),
+                  RGBA(230, 230, 230, 1)
+              )
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: |
+              =50
+            Text: |-
+              ="
+              "
+            Visible: =varPopDettaglioArticolo
+            Width: =73
+            X: =650
+            Y: =598
+      - Icon2:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: "=Switch(\n    LookUp('Ordini-BC', Nr = varOrdineSelezionato).Stato,\n    \"Aperto\", RGBA(158, 65, 0, 1),\n    \"Rilasciato\", RGBA(20, 66, 130, 1),\n    \"Evaso\", RGBA(30, 90, 40, 1),\n    \"Fatturato\", RGBA(90, 40, 130, 1),\n    RGBA(90, 90, 90, 1)\n) "
+            Height: =40
+            Icon: =Icon.DocumentPDF
+            OnSelect: "=Set(varPdfGenerato,\n    \n    PDF(cntSpecificaOrdineRiepilogo)\n);\nSet(varAnteprimaPdf, !varAnteprimaPdf)"
+            Visible: =varPopDettaglioArticolo
+            Width: =73
+            X: =650
+            Y: =603
+      - PdfViewer1_1:
+          Control: PDFViewer@2.5.0
+          Properties:
+            Document: =varPdfGenerato
+            Height: =481
+            Visible: =varAnteprimaPdf
+            Width: =972
+            X: =180
+            Y: =96
+      - cntMenu_2:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =TemaNewY.BluPrimario
+            Height: =713
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =5
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Visible: =varMenuAperto
+            Width: |-
+              =If(
+                  varMenuAperto,
+                  230,
+                  0
+              )
+            X: =
+            Y: =55
+          Children:
+            - Container26_4:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  AlignInContainer: =AlignInContainer.SetByContainer
+                  FillPortions: =0
+                  Height: |+
+                    =300
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =2
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =0
+                  RadiusTopRight: |
+                    =0
+                  Width: =Parent.Width-10
+                Children:
+                  - lblAgent_2:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =TemaNewY.AccentiDorati
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="AGENT"
+                        Visible: =Lower(varRuoloUtente) = "agent"
+                        Width: =Parent.Width
+                        X: =40
+                        Y: =40
+                  - lblMANAGER_2:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =TemaNewY.AccentiDorati
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="MANAGER"
+                        Visible: =Lower(varRuoloUtente) <> "agent"
+                        Width: =Parent.Width
+                  - BtnDashboard_2:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        Height: =42
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrDashboard, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="📊 DASHBOARD"
+                        Visible: =varRuoloUtente = "Manager" || varRuoloUtente = "Office"
+                        Width: =Parent.Width - 24
+                  - BtnOrders_2:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrOrders, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="🛒 ORDERS"
+                        Visible: =Lower(varRuoloUtente) <> "agent"
+                        Width: =Parent.Width - 24
+                  - BtnCustomers_2:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrCustomers, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="👩💼 CUSTOMERS"
+                        Width: =Parent.Width - 24
+                  - BtnReports_2:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrReports, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="📑 REPORTS"
+                        Visible: =varRuoloUtente = "Manager"
+                        Width: =Parent.Width - 24
+                  - Button1_10:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =Color.Transparent
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Height: =
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrCustomers, ScreenTransition.Fade)
+                        PressedBorderColor: =
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =25
+                        Text: |-
+                          ="👩‍💼 CUSTOMERS"
+                        Width: =Parent.Width
+                  - BtnProduct_8:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =Navigate(scrProducts, ScreenTransition.Fade);
+                          Set(varOrdineAttivo, false);
+                          Set(varClienteOrdine, Blank());
+                          Clear(colRigheOrdine);
+                          Navigate(scrProducts)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: |-
+                          ="📊 PRODUCTS"
+                        Width: =Parent.Width - 24
+            - Container26_5:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  AlignInContainer: =AlignInContainer.SetByContainer
+                  FillPortions: =0
+                  Height: =280
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =2
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =0
+                  RadiusTopRight: |
+                    =0
+                  Width: =Parent.Width-10
+                  Y: |
+                    =40
+            - Image2_14:
+                Control: Image@2.2.3
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Image: ='new-y_logo_sign'
+                  OnSelect: =Navigate('HP-MANAGER', ScreenTransition.Fade)
+                  X: =
+                  Y: =
+      - cntHambrg_2:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: |-
+              =If(
+                  varMenuAperto,
+                  TemaNewY.BluPrimario ,   // Blu scuro
+                  Color.Transparent
+              )
+            Height: =55
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            PaddingBottom: =8
+            PaddingRight: |
+              =8
+            Width: =230
+          Children:
+            - Icon4_3:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =TemaNewY.LuceSuperficie
+                  Height: =40
+                  Icon: =Icon.Hamburger
+                  OnSelect: =Set(varMenuAperto, !varMenuAperto)
+                  Width: =50
+                  X: |-
+                    =If(
+                        varMenuAperto,
+                        cntMenu_2.Width + 15,
+                        Icon4_3.Width + 15
+                    ) + cntHambrg_2.X
+                  Y: =
+      - Label6_2:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =TemaNewY.AccentiDorati
+            Font: =Font.'Open Sans'
+            Height: =28
+            Size: =8
+            Text: |-
+              ="🔐 In Arrivo"
+            Visible: =BtnReports.Visible && varMenuAperto
+            Width: =63
+            X: =144
+            Y: =249

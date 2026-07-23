@@ -1,0 +1,1481 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  scrProducts:
+    Properties:
+      Fill: =
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+      OnHidden: =Reset(TextInput1)
+      OnVisible: =Set(varMenuAperto, false)
+    Children:
+      - cntHomepage_19:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =TemaNewY.ScuroPrimario
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Width: |
+              =
+              Parent.Width - If(
+                  varMenuAperto,
+                  cntMenu.Width,
+                  0
+              )
+            X: |-
+              =If(
+                  varMenuAperto,
+                  cntMenu.Width,
+                  0
+              )
+          Children:
+            - cntHeader_17:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  FillPortions: =0
+                  Height: |
+                    =Parent.Height/7
+                  LayoutAlignItems: =LayoutJustifyContent.SpaceBetween
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                Children:
+                  - Container7_8:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =300
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        Width: |
+                          =Parent.Width/3
+                      Children:
+                        - Label1_20:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =TemaNewY.LuceSuperficie
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =30
+                              Text: ="PRODUCTS"
+                              Width: =500
+                              X: |
+                                =
+            - cntBottom_19:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  AlignInContainer: =AlignInContainer.Center
+                  Fill: =Color.Transparent
+                  Height: |
+                    =Parent.Height*2/3
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =5
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusTopRight: =16
+                  Width: |
+                    =Parent.Width
+                  Y: =cntHeader_17.Height
+                Children:
+                  - TextInput1:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Default: =
+                        Font: =Font.'Open Sans'
+                        HintText: |-
+                          ="🔍Search products by name, code, or category..."
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        RadiusBottomLeft: =20
+                        RadiusBottomRight: =20
+                        RadiusTopLeft: =20
+                        RadiusTopRight: =20
+                        Width: =Parent.Width-30
+                        X: =40
+                        Y: =40
+                  - Container5:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Start
+                        FillPortions: =0
+                        Height: =Parent.Height/20
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =50
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        Width: =Parent.Width
+                        X: =40
+                        Y: =
+                      Children:
+                        - Button4_1:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =If(varFiltroStock = "OK", RGBA(25, 135, 84, 1), RGBA(37, 63, 105, 1))
+                              Font: =Font.'Open Sans'
+                              Height: =30
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: =Set(varFiltroStock, If(varFiltroStock = "OK", Blank(), "OK"))
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =50
+                              RadiusBottomRight: =50
+                              RadiusTopLeft: =50
+                              RadiusTopRight: =50
+                              Text: |-
+                                ="🟢 OK"
+                              Width: =Parent.Width/6
+                        - Button4_2:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =If(varFiltroStock = "ATTENZIONE", RGBA(255, 170, 0, 1), RGBA(37, 63, 105, 1))
+                              Font: =Font.'Open Sans'
+                              Height: =30
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: =Set(varFiltroStock, If(varFiltroStock = "ATTENZIONE", Blank(), "ATTENZIONE"))
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =50
+                              RadiusBottomRight: =50
+                              RadiusTopLeft: =50
+                              RadiusTopRight: =50
+                              Text: |-
+                                ="🟡 In esaurimento"
+                              Width: =Parent.Width/6
+                        - Button4_3:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =If(varFiltroStock = "CRITICO", RGBA(220, 53, 69, 1), RGBA(37, 63, 105, 1))
+                              Font: =Font.'Open Sans'
+                              Height: =30
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: =Set(varFiltroStock, If(varFiltroStock = "CRITICO", Blank(), "CRITICO"))
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =50
+                              RadiusBottomRight: =50
+                              RadiusTopLeft: =50
+                              RadiusTopRight: =50
+                              Text: |-
+                                ="🔴 Critico"
+                              Width: =Parent.Width/6
+                        - Button4_4:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =If(varFiltroStock = "CRITICO", RGBA(220, 53, 69, 1), RGBA(37, 63, 105, 1))
+                              Font: =Font.'Open Sans'
+                              Height: =30
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: = Set(varFiltroSoloDisponibili, !varFiltroSoloDisponibili)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =50
+                              RadiusBottomRight: =50
+                              RadiusTopLeft: =50
+                              RadiusTopRight: =50
+                              Text: ="Filtro non disponibili"
+                              Visible: =varRuoloUtente = "Manager"
+                              Width: =Parent.Width/6
+                  - lblBannerOrdine:
+                      Control: Label@2.5.1
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =RGBA(255, 170, 0, 70%)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingLeft: =20
+                        Text: |-
+                          ="📝 Ordine per: " & varClienteOrdine.Nome & "   —   " & CountRows(colRigheOrdine) & " righe"
+                        Visible: =varOrdineAttivo
+                        Width: =Parent.Width - 30
+                  - Container8_1:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =10
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                      Children:
+                        - glrArticoli:
+                            Control: Gallery@2.15.0
+                            Variant: BrowseLayout_Vertical_TwoTextOneImageTwoColumnVariant_ver5.0
+                            Properties:
+                              AlignInContainer: =AlignInContainer.SetByContainer
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              DelayItemLoading: =true
+                              Fill: =TemaNewY.LuceSuperficie
+                              Items: |-
+                                =Filter(
+                                    'Articoli-BC',
+                                    (IsBlank(TextInput1.Text) ||
+                                     TextInput1.Text in Nr ||
+                                     StartsWith(Descrizione, TextInput1.Text))
+                                    &&
+                                    (IsBlank(varFiltroStock) ||
+                                     (varFiltroStock = "CRITICO" && Value('Quantità residua') < 30) ||
+                                     (varFiltroStock = "ATTENZIONE" && Value('Quantità residua') >= 30 && Value('Quantità residua') <= 100) ||
+                                     (varFiltroStock = "OK" && Value('Quantità residua') > 100))
+                                    &&
+                                    (!varFiltroSoloDisponibili || Disponibile = true)
+                                    &&
+                                    (varRuoloUtente <> "Agent" || Disponibile = true)
+                                )
+                              LoadingSpinner: =LoadingSpinner.Data
+                              Width: =Parent.Width
+                            Children:
+                              - imgFotoArticolo:
+                                  Control: Image@2.2.3
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Height: =Min(Self.Width, Parent.TemplateHeight - 115)
+                                    Image: =ThisItem.url
+                                    ImagePosition: =ImagePosition.Fill
+                                    OnSelect: |-
+                                      =Refresh('Articoli-BC');
+                                      Set(varArticoloSel, LookUp('Articoli-BC', Nr = ThisItem.Nr));
+                                      Set(varPopupArticolo, true);
+                                      Set(varQtaSel, 1);
+                                      Set(varMenuAperto,false)
+                                    PaddingBottom: =
+                                    RadiusBottomLeft: =40
+                                    RadiusBottomRight: =40
+                                    RadiusTopLeft: =40
+                                    RadiusTopRight: =40
+                                    Width: =Parent.TemplateWidth - 32
+                                    X: =16
+                                    Y: =16
+                              - Title8:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 0, 0, 1)
+                                    Color: =RGBA(50, 49, 48, 1)
+                                    Fill: |-
+                                      =If(
+                                          Value(ThisItem.'Quantità residua') < 30,
+                                          RGBA(220, 53, 69, 40%),
+                                          Value(ThisItem.'Quantità residua') <= 100,
+                                          RGBA(255, 170, 0, 40%),
+                                          RGBA(25, 135, 84, 40%)
+                                      )
+                                    Font: =Font.'Open Sans'
+                                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                    Height: =96
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =ThisItem.Title
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =643
+                                    X: =16
+                                    Y: =317
+                              - Label85:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.Verdana
+                                    OnSelect: =Select(Parent)
+                                    Text: =Upper(ThisItem.Descrizione)
+                                    X: =33
+                                    Y: =357
+                              - Label86:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Lato Black'
+                                    FontWeight: =FontWeight.Bold
+                                    OnSelect: =Select(Parent)
+                                    Text: |-
+                                      =Text(Value(ThisItem.'Prezzo unitario'), "[$-it-IT]€ #.##0,00")
+                                    X: =252
+                                    Y: =353
+                              - Label87:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.Verdana
+                                    OnSelect: =Select(Parent)
+                                    Text: ="Nr " & ThisItem.Nr
+                                    X: =33
+                                    Y: =317
+                              - Label28:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Open Sans'
+                                    Text: |-
+                                      ="Disp: " & Coalesce(Value(ThisItem.'Quantità residua'), 0) & " pz"
+                                    Width: =200
+                                    X: =246
+                                    Y: =317
+                              - Semaforo:
+                                  Control: Circle@2.3.0
+                                  Properties:
+                                    BorderColor: =Color.Black
+                                    BorderThickness: =2
+                                    Fill: |-
+                                      =If(
+                                          Value(ThisItem.'Quantità residua') < 30,
+                                          RGBA(220, 53, 69, 1),
+                                          Value(ThisItem.'Quantità residua') <= 100,
+                                          RGBA(255, 170, 0, 1),
+                                          RGBA(25, 135, 84, 1)
+                                      )
+                                    Height: =60
+                                    OnSelect: =Select(Parent)
+                                    Width: =60
+                                    X: =583
+                                    Y: =333
+                              - tglDisponibile:
+                                  Control: Classic/Toggle@2.1.0
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    Default: = ThisItem.Disponibile
+                                    FalseFill: =RGBA(200, 200, 200, 1)
+                                    Font: =Font.'Open Sans'
+                                    OnChange: |-
+                                      =Patch('Articoli-BC', ThisItem, { Disponibile: Self.Value });
+                                    OnCheck: =
+                                    OnSelect: =
+                                    OnUncheck: =
+                                    ShowLabel: =false
+                                    TrueFill: =RGBA(46, 125, 50, 1)
+                                    Visible: =varRuoloUtente = "Manager"
+                                    X: =446
+                                    Y: =351
+      - cntOverlay:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            Fill: =RGBA(0, 0, 0, 60%)
+            Height: =Parent.Height
+            Visible: '=varPopupArticolo || varPopupCarrello '
+            Width: =Parent.Width
+          Children:
+            - rctTornaIndietroProd:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Fill: =Color.Transparent
+                  Height: =Parent.Height
+                  OnSelect: |-
+                    =If(
+                        varPopupRiordino,
+                        Set(varPopupRiordino, false),
+                        varPopupCarrello,
+                        Set(varPopupCarrello, false),
+                        varPopupArticolo,
+                        Set(varPopupArticolo, false)
+                    )
+                  Visible: =varPopupArticolo || varPopupCarrello || varPopupRiordino
+                  Width: =Parent.Width
+            - cntPopDettArticolo:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =TemaNewY.LuceSuperficie
+                  Height: =Parent.Height * 3/5
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =20
+                  RadiusTopRight: =20
+                  Visible: =varPopupArticolo
+                  Width: =Parent.Width * 3/5
+                  X: =(Parent.Width - Self.Width) / 2
+                  Y: =(Parent.Height - Self.Height) / 2
+                Children:
+                  - Image3:
+                      Control: Image@2.2.3
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Height: =200
+                        Image: =varArticoloSel.url
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Width: =300
+                        X: =20
+                        Y: =20
+                  - cntSpecificheArticolo:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                      Children:
+                        - Label31NomeArticoloSelezionato:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =Color.DarkGray
+                              BorderThickness: =2
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              Height: =30
+                              Size: =24
+                              Text: =varArticoloSel.Descrizione
+                              Width: = Parent.Width*0.80
+                              X: =37
+                              Y: =56
+                        - Label32:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =RGBA(100, 100, 100, 1)
+                              Font: =Font.'Open Sans'
+                              Size: =14
+                              Text: |-
+                                = "Codice: " & varArticoloSel.Nr
+                              Width: =Parent.Width * 0.45
+                              X: =37
+                              Y: =126
+                        - Label33:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Semibold
+                              Size: =22
+                              Text: |-
+                                =Text(Value(varArticoloSel.'Prezzo unitario'), "[$-it-IT]€ #.##0,00")
+                              Width: =200
+                              X: =205
+                              Y: =126
+                        - Label34:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Font: =Font.Arial
+                              Size: =15
+                              Text: |-
+                                ="Disponibilità: " & Coalesce(Value(varArticoloSel.'Quantità residua'), 0) & " " & varArticoloSel.'Unità di misura base'
+                              Width: =202
+                              X: =18
+                              Y: =204
+                        - Label2:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: |-
+                                =If(
+                                    Coalesce(Value(varArticoloSel.'Quantità residua'), 0) < 30,
+                                    RGBA(220, 53, 69, 1),
+                                    Value(varArticoloSel.'Quantità residua') <= 100,
+                                    RGBA(255, 170, 0, 1),
+                                    RGBA(25, 135, 84, 1)
+                                )
+                              Font: =Font.'Open Sans'
+                              Height: =62
+                              Text: |-
+                                =If(
+                                    Coalesce(Value(varArticoloSel.'Quantità residua'), 0) < 30,
+                                    Upper("🔴 Critico"),
+                                    Value(varArticoloSel.'Quantità residua') <= 100,
+                                    Upper("🟡 In esaurimento"),
+                                    Upper("🟢 OK")
+                                )
+                              X: =220
+                              Y: =193
+                        - Button3:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =Color.DimGray
+                              Font: =Font.'Open Sans'
+                              Height: =If(Value(varArticoloSel.'Quantità residua') <= 0, 100, 50)
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              OnSelect: |+
+                                =Set(varPopupRiordino, true)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              Text: |-
+                                ="📦 Richiedi riordino"
+                              Width: =If(Value(varArticoloSel.'Quantità residua') <= 0, 404, 202)
+                              X: |-
+                                =If(
+                                    Value(varArticoloSel.'Quantità residua') <= 0,
+                                    180 - (404 - 202)/2,
+                                    180
+                                )
+                              Y: =255
+            - cntConfermaOrdine:
+                Control: GroupContainer@1.5.0
+                Variant: ManualLayout
+                Properties:
+                  Fill: =RGBA(37, 63, 105, 80%)
+                  Height: =65
+                  Visible: =varPopupArticolo && Value(varArticoloSel.'Quantità residua') > 0
+                  Width: =cntPopDettArticolo.Width - 40
+                  X: =cntPopDettArticolo.X + 20
+                  Y: =cntPopDettArticolo.Y + cntPopDettArticolo.Height - 85
+                Children:
+                  - iconCarrello:
+                      Control: Classic/Icon@2.5.0
+                      Properties:
+                        BorderColor: =TemaNewY.LuceSuperficie
+                        BorderThickness: =1
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =Color.Transparent
+                        Height: = 45
+                        Icon: =Icon.ShoppingCart
+                        OnSelect: |-
+                          =With(
+                              { articoloAggiornato: LookUp('Articoli-BC', Nr = varArticoloSel.Nr) },
+                              If(
+                                  !articoloAggiornato.Disponibile,
+                                  Notify("Questo prodotto è stato disattivato nel frattempo. Impossibile procedere.", NotificationType.Error),
+
+                                  If(
+                                      varOrdineAttivo,
+
+                                      // --- IL TUO CORE INTATTO ---
+                                      If(
+                                          IsBlank(LookUp(colRigheOrdine, NrArt = Value(varArticoloSel.Nr))),
+                                          Collect(colRigheOrdine, {
+                                              NrArt: Value(varArticoloSel.Nr),
+                                              Descrizione: varArticoloSel.Descrizione,
+                                              Prezzo: Value(varArticoloSel.'Prezzo unitario'),
+                                              Qta: varQtaSel
+                                          }),
+                                          UpdateIf(colRigheOrdine, NrArt = Value(varArticoloSel.Nr), { Qta: Qta + varQtaSel })
+                                      );
+                                      // --- FINE CORE ---
+
+                                      Notify(varArticoloSel.Descrizione & " ×" & varQtaSel & " aggiunto all'ordine", NotificationType.Success);
+                                      Set(varPopupArticolo, false),
+
+                                      // --- SE SEI DAI PRODOTTI SENZA CLIENTE (varOrdineAttivo = false) ---
+                                      Notify("⚠ Non puoi ordinare senza selezionare un cliente. Vai su Customers e crea un nuovo ordine.", NotificationType.Warning)
+                                  )
+                              )
+                          )
+                        Visible: =Value(varArticoloSel.'Quantità residua') > 0
+                        Width: '=Parent.Width * 0.22 '
+                        X: =Parent.Width - Self.Width - 15
+                        Y: =(Parent.Height - Self.Height) / 2
+                  - icon+:
+                      Control: Classic/Icon@2.5.0
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =Color.Transparent
+                        Height: =40
+                        Icon: =Icon.Add
+                        OnSelect: |-
+                          =If(
+                              varOrdineAttivo,
+                              If(
+                                  Value(varArticoloSel.'Quantità residua') <= 0,
+                                  Notify("Scorta non disponibile. Effettua una richiesta di riordino.", NotificationType.Error),
+                                  varQtaSel + 1 > Value(varArticoloSel.'Quantità residua'),
+                                  Notify("Quantità massima raggiunta per questo prodotto.", NotificationType.Error),
+                                  Set(varQtaSel, varQtaSel + 1)
+                              )
+                          )
+                        Visible: =Value(varArticoloSel.'Quantità residua') > 0
+                        Width: =40
+                        X: =varQtaSelezionata.X + varQtaSelezionata.Width + 15
+                        Y: =(Parent.Height - Self.Height) / 2
+                  - varQtaSelezionata:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =Color.DarkGray
+                        BorderThickness: =2
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =Color.Transparent
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Size: =18
+                        Text: =varQtaSel
+                        Visible: =Value(varArticoloSel.'Quantità residua') > 0
+                        Width: =100
+                        X: ='icon-'.X + 'icon-'.Width + 15
+                        Y: =(Parent.Height - Self.Height) / 2
+                  - icon-:
+                      Control: Classic/Icon@2.5.0
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =Color.Transparent
+                        Height: =40
+                        Icon: =Icon.HorizontalLine
+                        OnSelect: =If(varOrdineAttivo, Set(varQtaSel, Max(1, varQtaSel - 1)))
+                        Visible: =Value(varArticoloSel.'Quantità residua') > 0
+                        Width: =40
+                        X: =15
+                        Y: =(Parent.Height - Self.Height) / 2
+            - cntPopUpRiepilogoOrdine:
+                Control: GroupContainer@1.5.0
+                Variant: ManualLayout
+                Properties:
+                  Fill: =TemaNewY.LuceSuperficie
+                  Height: =Parent.Height * 0.85
+                  RadiusBottomLeft: =12
+                  RadiusBottomRight: =12
+                  RadiusTopLeft: =12
+                  RadiusTopRight: =12
+                  Visible: =varPopupCarrello
+                  Width: =Parent.Width * 0.75
+                  X: =(Parent.Width - Self.Width) / 2
+                  Y: =(Parent.Height - Self.Height) / 2
+                Children:
+                  - Container10:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        Fill: =RGBA(102, 182, 227, 1)
+                        Height: =65
+                        Width: =206
+                        X: =796
+                        Y: =548
+                      Children:
+                        - Label59_1:
+                            Control: Label@2.5.1
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              Height: =63
+                              Text: |-
+                                =Upper("Totale Ordine:                     ") & Text(Coalesce(Sum(colRigheOrdine, Qta * Prezzo), 0), "[$-it-IT]€ #.##0,00")
+                              Width: =204
+                  - lblRiepilogoCarrello:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Fill: =TemaNewY.AccentiDorati
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Size: =18
+                        Text: |-
+                          ="🛒 Riepilogo ordine — " & varClienteOrdine.Nome
+                        Width: =Parent.Width-45
+                        X: =25
+                        Y: =20
+                  - Gallery6:
+                      Control: Gallery@2.15.0
+                      Variant: Vertical
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Height: =451
+                        Items: =colRigheOrdine
+                        TemplateSize: =70
+                        Width: =Parent.Width - 40
+                        X: =20
+                        Y: =75
+                      Children:
+                        - Label48:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              Height: =50
+                              OnSelect: =Select(Parent)
+                              Size: =18
+                              Text: =ThisItem.Descrizione
+                              Width: =400
+                              X: =98
+                              Y: =7
+                        - TextInput4:
+                            Control: Classic/TextInput@2.3.2
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Default: =ThisItem.Qta
+                              Font: =Font.'Open Sans'
+                              HoverBorderColor: =RGBA(0, 18, 107, 1)
+                              HoverFill: =RGBA(186, 202, 226, 1)
+                              OnChange: |-
+                                =With(
+                                    { qtaInserita: Value(TextInput4.Text) },
+                                    With(
+                                        { qtaMax: Value(LookUp('Articoli-BC', Value(Nr) = ThisItem.NrArt).'Quantità residua') },
+                                        If(
+                                            qtaInserita > qtaMax,
+                                            UpdateIf(colRigheOrdine, NrArt = ThisItem.NrArt, { Qta: qtaMax });
+                                            Notify("Quantità massima disponibile: " & qtaMax, NotificationType.Warning),
+                                            UpdateIf(colRigheOrdine, NrArt = ThisItem.NrArt, { Qta: qtaInserita })
+                                        )
+                                    )
+                                )
+                              OnSelect: =Select(Parent)
+                              Width: =50
+                              X: =541
+                              Y: =12
+                        - Label50:
+                            Control: Label@2.5.1
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Bold
+                              OnSelect: =Select(Parent)
+                              Text: |-
+                                =Text(Value(TextInput4.Text) * ThisItem.Prezzo, "[$-it-IT]€ #.##0,00")
+                              X: =664
+                              Y: =12
+                        - Icon3:
+                            Control: Classic/Icon@2.5.0
+                            Properties:
+                              BorderColor: =RGBA(0, 18, 107, 1)
+                              Color: =RGBA(168, 0, 0, 1)
+                              Height: =50
+                              Icon: =Icon.Trash
+                              OnSelect: |-
+                                =Patch(
+                                    'MovimentoArticoli-BC',
+                                    Defaults('MovimentoArticoli-BC'),
+                                    {
+                                        'Nr articolo': Value(ThisItem.NrArt),
+                                        'Quantità residua': Value(ThisItem.Qta) // Rimette la quantità positiva nel database
+                                    }
+                                );
+                                Remove(colRigheOrdine, ThisItem)
+                              Width: =50
+                              X: =6
+                              Y: =7
+                  - btnConfermaOrdine_1:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =RGBA(25,135,84,1)
+                        Font: =Font.'Open Sans'
+                        Height: =63
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =If(
+                              CountRows(colRigheOrdine) = 0,
+                              Notify("Il carrello è vuoto. Aggiungi almeno un articolo.", NotificationType.Error),
+
+                              !IsBlank(
+                                  First(
+                                      Filter(
+                                          colRigheOrdine,
+                                          !LookUp('Articoli-BC', Value(Nr) = NrArt).Disponibile
+                                      )
+                                  )
+                              ),
+                              Notify(
+                                  "Il prodotto """ &
+                                  First(
+                                      Filter(
+                                          colRigheOrdine,
+                                          !LookUp('Articoli-BC', Value(Nr) = NrArt).Disponibile
+                                      )
+                                  ).Descrizione &
+                                  """ non è più disponibile. Rimuovilo dal carrello per procedere.",
+                                  NotificationType.Error
+                              ),
+
+                              Set(varNuovoNr, Max('Ordini-BC', Value(Nr)) + 1);
+                              Patch(
+                                  'Ordini-BC',
+                                  Defaults('Ordini-BC'),
+                                  {
+                                      'Tipo di documento': "Ordine",
+                                      Nr: Text(varNuovoNr),
+                                      'Fatturare a - Nome': varClienteOrdine.Nome,
+                                      'Fatturare a - Città': varClienteOrdine.Città,
+                                      'Data ordine': Today(),
+                                      Stato: "Aperto",
+                                      'ID-Cliente': varClienteOrdine.ID
+                                  }
+                              );
+                              ForAll(
+                                  colRigheOrdine As R,
+                                  Patch(
+                                      'RigheOrdini-BC',
+                                      Defaults('RigheOrdini-BC'),
+                                      {
+                                          'Tipo di documento': "Ordine",
+                                          'Nr documento': Text(varNuovoNr),
+                                          'Nr riga': (CountRows(Filter(colRigheOrdine, NrArt <= R.NrArt))) * 10000,
+                                          Tipo: "Articolo",
+                                          Nr: Text(R.NrArt),
+                                          Descrizione: R.Descrizione,
+                                          Quantità: R.Qta,
+                                          'Prezzo unitario': R.Prezzo,
+                                          Importo: R.Qta * R.Prezzo
+                                      }
+                                  )
+                              );
+                              ForAll(
+                                  colRigheOrdine As R,
+                                  UpdateIf(
+                                      'Articoli-BC',
+                                      Value(Nr) = R.NrArt,
+                                      { 'Quantità residua': Value('Quantità residua') - R.Qta }
+                                  )
+                              );
+
+                              ForAll(
+                                  colRigheOrdine As R,
+                                  Patch(
+                                      'MovimentoArticoli-BC',
+                                      Defaults('MovimentoArticoli-BC'),
+                                      {
+                                          'Nr articolo': R.NrArt,
+                                          'Quantità residua': R.Qta * -1
+                                      }
+                                  )
+                              );
+                              Refresh('Articoli-BC');
+                              If(
+                                  !IsBlank(varArticoloSel),
+                                  Set(varArticoloSel, LookUp('Articoli-BC', Value(Nr) = Value(varArticoloSel.Nr)))
+                              );
+
+                              Notify("Ordine " & varNuovoNr & " creato con successo! ✔", NotificationType.Success);
+                              Clear(colRigheOrdine);
+                              Set(varOrdineAttivo, false);
+                              Set(varClienteOrdine, Blank());
+                              Set(varPopupCarrello, false);
+
+                              Navigate(scrCustomers, ScreenTransition.Fade)
+                          )
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: = "✔ CONFERMA ORDINE"
+                        Width: =Parent.Width/4
+                        X: =72
+                        Y: =550
+            - cntPopUpRiordino:
+                Control: GroupContainer@1.5.0
+                Variant: ManualLayout
+                Properties:
+                  Fill: =TemaNewY.LuceSuperficie
+                  Height: =(Parent.Height * 4/5) * (0.7 + 0.3 * (Timer2.Value / 200))
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =20
+                  RadiusTopRight: =20
+                  Visible: =varPopupRiordino
+                  Width: =(Parent.Width * 4/5) * (0.7 + 0.3 * (Timer2.Value / 200))
+                  X: =(Parent.Width - Self.Width) / 2
+                  Y: =(Parent.Height - Self.Height) / 2
+                Children:
+                  - Label20:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Size: =20
+                        Text: =varArticoloSel.Descrizione & " (Cod. " & varArticoloSel.Nr & ")"
+                        Width: =577
+                        X: =90
+                        Y: =30
+                  - txtQtaRiordino:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Default: ="0"
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Mode: =TextMode.MultiLine
+                        Width: =75
+                        X: =451
+                        Y: =95
+                  - txtNotaRiordino:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Default: =
+                        Font: =Font.'Open Sans'
+                        Height: =74
+                        HintText: ="Dettagli aggiuntivi (opzionale)"
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Width: =577
+                        X: =90
+                        Y: =254
+                  - btnConfermaRiordino:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =RGBA(46, 125, 50, 1)
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: = RGBA(76, 175, 80, 1)
+                        OnSelect: |-
+                          =If(
+                              IsBlank(txtQtaRiordino.Text) || Value(txtQtaRiordino.Text) <= 0,
+                              Notify("Inserisci una quantità valida", NotificationType.Error),
+                              IsBlank(cmbMotivoRiordino.Selected.Value),
+                              Notify("Seleziona una motivazione", NotificationType.Error),
+                              // tutto ok, procedi
+                              Set(
+                                  varRiordinoCreato,
+                                  Patch(
+                                      'Riordini-BC',
+                                      Defaults('Riordini-BC'),
+                                      {
+                                          Title: varArticoloSel.Nr,
+                                          CodArticolo: varArticoloSel.Nr,
+                                          Descrizione: varArticoloSel.Descrizione,
+                                          QtaRichiesta: Value(txtQtaRiordino.Text),
+                                          Motivazione: { Value: cmbMotivoRiordino.Selected.Value },
+                                          Note: txtNotaRiordino.Text,
+                                          Stato: { Value: If(varRuoloUtente = "Manager", "Approvato", "InAttesa") },
+                                          Richiedente: Left(varUtenteCorrente.Email, Find("@", varUtenteCorrente.Email) - 1),
+                                          DataRichiesta: Today()
+                                      }
+                                  )
+                              );
+                              If(
+                                  varRuoloUtente = "Manager",
+                                  Patch(
+                                      'Articoli-BC',
+                                      LookUp('Articoli-BC', Nr = varArticoloSel.Nr),
+                                      { 'Quantità residua': Value(varArticoloSel.'Quantità residua') + Value(txtQtaRiordino.Text) }
+                                  ),
+                                  Patch(
+                                      'Notifiche-BC',
+                                      Defaults('Notifiche-BC'),
+                                      {
+                                          Title: "Richiesta riordino: " & varArticoloSel.Descrizione,
+                                          TipoNotifica: { Value: "RichiestaRiordino" },
+                                          Mittente: Left(varUtenteCorrente.Email, Find("@", varUtenteCorrente.Email) - 1),
+                                          Destinatario: "Manager",
+                                          Messaggio: "Richiesti " & txtQtaRiordino.Text & " pz di " & varArticoloSel.Descrizione & " (Cod. " & varArticoloSel.Nr & ") — " & cmbMotivoRiordino.Selected.Value,
+                                          Letta: false,
+                                          Data: Now(),
+                                          LinkRif: Text(varRiordinoCreato.ID)
+                                      }
+                                  )
+                              );
+                              Notify(If(varRuoloUtente = "Manager", "Riordino registrato: +" & txtQtaRiordino.Text & " pz", "Richiesta inviata al Manager"), NotificationType.Success);
+                              Reset(txtQtaRiordino);
+                              Reset(cmbMotivoRiordino);
+                              Reset(txtNotaRiordino);
+                              Set(varPopupRiordino, false)
+                          )
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: ="Conferma riordino"
+                        Width: =214
+                        X: =144
+                        Y: =349
+                  - lblQtyDaOrdinare:
+                      Control: Label@2.5.1
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        Text: ="Quantità da riordinare :"
+                        Width: =205
+                        X: =235
+                        Y: =95
+                  - btnAnnulla:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: |+
+                          =Color.DarkRed
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: |-
+                          =
+                          RGBA(229, 57, 53, 1)
+                        OnSelect: |-
+                          =Reset(txtQtaRiordino);
+                          Reset(txtNotaRiordino);
+                          Set(varPopupRiordino, false)
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: ="Annulla"
+                        Width: =214
+                        X: =423
+                        Y: =349
+                  - cmbMotivoRiordino:
+                      Control: Classic/ComboBox@2.4.0
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        ChevronBackground: =RGBA(56, 96, 178, 1)
+                        ChevronFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Font.'Open Sans'
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        InputTextPlaceholder: ="Seleziona una motivazione"
+                        Items: =Choices('Riordini-BC'.Motivazione)
+                        NoSelectionText: =
+                        PressedColor: =RGBA(255, 255, 255, 1)
+                        PressedFill: =RGBA(0, 18, 107, 1)
+                        SearchFields: =["Value"]
+                        SelectMultiple: =false
+                        SelectionColor: =RGBA(255, 255, 255, 1)
+                        SelectionFill: =RGBA(56, 96, 178, 1)
+                        X: =214
+                        Y: =174
+      - CerchioNotifica_1:
+          Control: Circle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =TemaNewY.AccentiDorati
+            Height: =45
+            Visible: =CountRows(colRigheOrdine) > 0
+            Width: =45
+            X: =1258
+            Y: =20
+      - Icon1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =TemaNewY.LuceSuperficie
+            Fill: =Color.Transparent
+            Height: =46
+            Icon: =Icon.ShoppingCart
+            OnSelect: =Set(varPopupCarrello, true)
+            Width: =52
+            X: =1227
+            Y: =43
+      - Label25_7:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =45
+            Size: =14
+            Text: =CountRows(colRigheOrdine)
+            Visible: =CountRows(colRigheOrdine) > 0
+            Width: =43
+            X: =1260
+            Y: =20
+      - cntMenu_3:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =TemaNewY.BluPrimario
+            Height: =713
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =5
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Visible: =varMenuAperto
+            Width: =249
+            X: =
+            Y: =55
+          Children:
+            - Container26_6:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  AlignInContainer: =AlignInContainer.SetByContainer
+                  FillPortions: =0
+                  Height: |+
+                    =300
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =2
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =0
+                  RadiusTopRight: |
+                    =0
+                  Width: =Parent.Width-10
+                Children:
+                  - lblAgent_3:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =TemaNewY.AccentiDorati
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="AGENT"
+                        Visible: =Lower(varRuoloUtente) = "agent"
+                        Width: =Parent.Width
+                        X: =40
+                        Y: =40
+                  - lblMANAGER_3:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =TemaNewY.LuceSuperficie
+                        Fill: =TemaNewY.AccentiDorati
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="MANAGER"
+                        Visible: =Lower(varRuoloUtente) <> "agent"
+                        Width: =Parent.Width
+                  - BtnDashboard_3:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        Height: =42
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrDashboard, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="📊 DASHBOARD"
+                        Visible: =varRuoloUtente = "Manager" || varRuoloUtente = "Office"
+                        Width: =Parent.Width - 24
+                  - BtnOrders_3:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrOrders, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="🛒 ORDERS"
+                        Visible: =Lower(varRuoloUtente) <> "agent"
+                        Width: =Parent.Width - 24
+                  - BtnCustomers_3:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrCustomers, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="👩💼 CUSTOMERS"
+                        Width: =Parent.Width - 24
+                  - BtnReports_3:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrReports, ScreenTransition.Fade)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =13
+                        Text: |-
+                          ="📑 REPORTS"
+                        Visible: =varRuoloUtente = "Manager"
+                        Width: =Parent.Width - 24
+                  - Button1_11:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =Color.Transparent
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Height: =
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Navigate(scrCustomers, ScreenTransition.Fade)
+                        PressedBorderColor: =
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Size: =25
+                        Text: |-
+                          ="👩‍💼 CUSTOMERS"
+                        Width: =Parent.Width
+                  - BtnProduct_6:
+                      Control: Classic/Button@2.2.0
+                      Properties:
+                        Align: =Align.Left
+                        BorderColor: =ColorFade(Self.Fill, -15%)
+                        Color: =TemaNewY.LuceSuperficie
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        Fill: =TemaNewY.BluPrimario
+                        Font: =Font.'Open Sans'
+                        HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        OnSelect: |-
+                          =Navigate(scrProducts, ScreenTransition.Fade);
+                          Set(varOrdineAttivo, false);
+                          Set(varClienteOrdine, Blank());
+                          Clear(colRigheOrdine);
+                          Navigate(scrProducts)
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        PressedBorderColor: =Self.Fill
+                        PressedColor: =Self.Fill
+                        PressedFill: =Self.Color
+                        Text: |-
+                          ="📊 PRODUCTS"
+                        Width: =Parent.Width - 24
+            - Container26_7:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  AlignInContainer: =AlignInContainer.SetByContainer
+                  FillPortions: =0
+                  Height: =280
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =2
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =0
+                  RadiusTopRight: |
+                    =0
+                  Width: =Parent.Width-10
+                  Y: |
+                    =40
+            - Image2_16:
+                Control: Image@2.2.3
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Image: ='new-y_logo_sign'
+                  OnSelect: =Navigate('HP-MANAGER', ScreenTransition.Fade)
+                  X: =
+                  Y: =
+      - cntHambrg_3:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: |-
+              =If(
+                  varMenuAperto,
+                  TemaNewY.BluPrimario ,   // Blu scuro
+                  Color.Transparent
+              )
+            Height: =55
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            PaddingBottom: =8
+            PaddingRight: |
+              =8
+            Width: =249
+          Children:
+            - Icon4_4:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =TemaNewY.LuceSuperficie
+                  Height: =40
+                  Icon: =Icon.Hamburger
+                  OnSelect: =Set(varMenuAperto, !varMenuAperto)
+                  Width: =50
+                  X: |-
+                    =If(
+                        varMenuAperto,
+                        cntMenu_3.Width + 15,
+                        Icon4_4.Width + 15
+                    ) + cntHambrg_3.X
+                  Y: =
+      - Label6_3:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =TemaNewY.AccentiDorati
+            Font: =Font.'Open Sans'
+            Height: =28
+            Size: =8
+            Text: |-
+              ="🔐 In Arrivo"
+            Visible: =BtnReports.Visible && varMenuAperto
+            Width: =79
+            X: =146
+            Y: =248
